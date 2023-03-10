@@ -1,11 +1,22 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+<template>
+  
+  <HomeLogin class="pt-15 ml-2"/>
+
+</template>
+
+<script>
+import HomeLogin from '../components/HomeLogin.vue';
+
+export default {
+    data() {
+        return {
+        };
+    },
+    components: { HomeLogin }
+}
+
 </script>
 
-<template>
-  <main>
-  <v-card>
-    hello
-  </v-card>
-  </main>
-</template>
+<style scoped>
+
+</style>
