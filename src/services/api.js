@@ -24,6 +24,7 @@ async function getUsers() {
       headers: {
         token: store.token
       }
+     
     })
     return response.data
   } catch (error) {
@@ -34,7 +35,7 @@ async function getUsers() {
 async function getUserInfo(id) {
   const store = useAuthStore()
   try {
-    const response = await API.patch(
+    const response = await API.get(
       `/user/${id}`,
       { id: id },
       {

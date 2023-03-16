@@ -1,14 +1,13 @@
 <template>
-  <div>
-    llegadas y salidas
-  
-  </div>
+<InOut />
 </template>
 
 <script>
+import InOut from '../components/InOut.vue';
+
   export default {
-    
-  }
+    components: { InOut }
+}
 </script>
 
 <style scoped>

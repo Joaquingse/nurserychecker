@@ -1,9 +1,5 @@
 <template>
-  <v-container>
-    <v-row>
-      <Menu />
-    </v-row>
-  </v-container>
+  <Menu />
 </template>
 
 <script>
@@ -11,7 +7,7 @@ import Menu from '../components/Menu.vue'
 
 export default {
   components: {
-    Menu,
+    Menu
   }
 }
 </script>

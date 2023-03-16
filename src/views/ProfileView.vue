@@ -1,15 +1,13 @@
 <template>
-  <div>
-    datos usuario
-  </div>
+  <UserProfile />
 </template>
 
 <script>
-  export default {
-    
-  }
+import UserProfile from '../components/UserProfile.vue'
+
+export default {
+  components: { UserProfile }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

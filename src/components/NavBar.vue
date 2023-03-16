@@ -3,18 +3,20 @@
     <v-col cols="12">
       <div v-if="store.isLoggedIn">
         <v-app-bar color="#073B4C" class="navBar" app>
-          <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"> </v-app-bar-nav-icon>
+          <v-tooltip text="Menú" v-slot:activator="{ props }" location="bottom">
+          <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" v-bind="props"> </v-app-bar-nav-icon>
+        </v-tooltip>
           <v-toolbar-title>Nursery Checker</v-toolbar-title>
-          <v-btn variant="text" icon="mdi-logout" @click="logout"></v-btn>
-          <v-btn variant="text" icon="mdi-dots-vertical" :to="{ name: 'profile' }"></v-btn>
+          
+          <v-tooltip text="Salir" v-slot:activator="{ props }" location="bottom">
+            <v-btn variant="text" icon="mdi-logout" @click="logout" v-bind="props"></v-btn>
+          </v-tooltip>
+          <v-tooltip text="Mí perfil" v-slot:activator="{ props }" location="bottom"> 
+          <v-btn variant="text" v-bind="props" icon="mdi-account" :to="{ name: 'profile' }"></v-btn>
+            </v-tooltip>
         </v-app-bar>
 
-        <v-navigation-drawer
-          v-model="drawer"
-          temporary
-          height="fit-content"
-          color="transparent"
-        >
+        <v-navigation-drawer v-model="drawer" temporary color="rgba(117, 117, 117, 0.5)" floating>
           <v-list nav>
             <v-list-item class="navBar list" rounded :to="{ name: 'children' }">
               ALUMNOS
@@ -31,9 +33,7 @@
             <v-list-item class="navBar list" rounded :to="{ name: 'nurseries' }">
               GUARDERIAS
             </v-list-item>
-            <v-list-item class="navBar list" rounded  @click="logout">
-              LOGOUT
-            </v-list-item>
+            <v-list-item class="navBar list" rounded @click="logout"> LOGOUT </v-list-item>
           </v-list>
         </v-navigation-drawer>
       </div>
@@ -76,6 +76,6 @@ export default {
 
 .list {
   padding-left: 30px;
-  width: 240px;
+  width: 300px;
 }
 </style>

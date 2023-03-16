@@ -5,7 +5,7 @@
         <NavBar />
       </v-row>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="12" class="mt-4 mx-auto">
           <RouterView />
         </v-col>
       </v-row>

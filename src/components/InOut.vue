@@ -1,5 +1,8 @@
 <template>
-  <v-btn @click.prevent="goBack" rounded id="text"> Atrás </v-btn>
+    <v-row>
+      llegadas y salidas
+     <v-btn @click.prevent="goBack" rounded id="text"> Atrás </v-btn>
+  </v-row>
 </template>
 
 <script>

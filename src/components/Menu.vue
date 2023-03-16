@@ -1,20 +1,14 @@
 <template>
   <div class="mt-4 mx-auto">
-    <v-col cols="12" md="8" class="pa-5">
-      <v-btn size="x-large" rounded class="button"> Lista de niños </v-btn>
-    </v-col>
-    <v-col cols="12" md="8" class="pa-5">
-      <v-btn size="x-large" rounded class="button"> Llegada-Salida </v-btn>
-    </v-col>
-    <v-col cols="12" md="8" class="pa-5">
-      <v-btn size="x-large" rounded class="button"> Eventos (D/S/M) </v-btn>
-    </v-col>
-    <v-col cols="12" md="8" class="pa-5">
-      <v-btn size="x-large" rounded class="button"> Usuarios </v-btn>
-    </v-col>
-    <v-col cols="12" md="8" class="pa-5">
-      <v-btn size="x-large" rounded class="button"> Guradería/s </v-btn>
-    </v-col>
+    <v-btn size="x-large" rounded class="button" :to="{ name: 'children' }"> Lista de niños </v-btn>
+
+    <v-btn size="x-large" rounded class="button" :to="{ name: 'inout' }"> Llegada-Salida </v-btn>
+
+    <v-btn size="x-large" rounded class="button" :to="{ name: 'events' }"> Eventos (D/S/M) </v-btn>
+
+    <v-btn size="x-large" rounded class="button" :to="{ name: 'workers' }"> Usuarios </v-btn>
+
+    <v-btn size="x-large" rounded class="button" :to="{ name: 'nurseries' }"> Guradería/s </v-btn>
   </div>
 </template>
 
@@ -32,11 +26,13 @@ export default {
 </script>
 
 <style scoped>
-
 .button {
+  display: block;
   color: #06d6a0;
   background-color: #073b4c;
   width: 300px;
+  margin: 20px auto;
+  text-align: center;
+  padding-top: 15px;
 }
-
 </style>
