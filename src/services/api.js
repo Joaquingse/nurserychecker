@@ -3,7 +3,7 @@ import { useAuthStore } from '../stores/store'
 
 const API = axios.create({
   baseURL: 'http://localhost:3000/api',
-  headers: { 
+  headers: {
     token: localStorage.getItem('token')
   }
 })
@@ -24,7 +24,6 @@ async function getUsers() {
       headers: {
         token: store.token
       }
-     
     })
     return response.data
   } catch (error) {
@@ -50,8 +49,27 @@ async function getUserInfo(id) {
   }
 }
 
+async function updateUserInfo(id, info) {
+  const store = useAuthStore()
+  try {
+    const response = await API.put(
+      `/user/${id}`,
+      info,
+      {
+        headers: {
+          token: store.token
+        }
+      }
+    )
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   login,
   getUsers,
-  getUserInfo
+  getUserInfo,
+  updateUserInfo
 }
