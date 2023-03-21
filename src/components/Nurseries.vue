@@ -1,8 +1,8 @@
 <template>
   <div>
     guarderias
-    <v-row>
-     <v-btn @click.prevent="goBack" rounded id="text"> Atrás </v-btn>
+    <v-row justify="end">
+     <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
   </v-row>
   </div>
 </template>

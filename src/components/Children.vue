@@ -2,7 +2,7 @@
   <v-row>
     lista de nenes
     
-     <v-btn @click.prevent="goBack" rounded id="text"> Atrás </v-btn>
+     <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
   </v-row>
  
 </template>

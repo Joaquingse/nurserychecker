@@ -28,6 +28,17 @@ export default {
   },
   data() {
     return {}
+  },
+  beforeMount(){
+    this.clearAll()
+  },
+  beforeUnmount(){
+    this.clearAll()
+  },
+  methods:{
+    clearAll(){
+     window.localStorage.clear()
+    }
   }
 }
 </script>

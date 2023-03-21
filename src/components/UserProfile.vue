@@ -3,19 +3,18 @@
     <v-card class="info" v-if="!edit">
       <v-card-title>Datos de usuario </v-card-title>
       <v-divider></v-divider>
-      <v-card-text> Nombre: {{ name }} </v-card-text>
-      <v-card-text> Apellido: {{ surname }} </v-card-text>
-      <v-card-text> DNI: {{ dni }} </v-card-text>
+      <v-card-text> Nombre: {{ name.toLocaleUpperCase() }} </v-card-text>
+      <v-card-text> Apellido: {{ surname.toLocaleUpperCase() }} </v-card-text>
+      <v-card-text> DNI: {{ dni.toLocaleUpperCase() }} </v-card-text>
       <v-card-text> Teléfono: {{ phone }} </v-card-text>
       <v-card-text> E-mail: {{ email }} </v-card-text>
       <v-divider></v-divider>
       <v-card-actions class="button">
-        <v-btn id="text" prepend-icon="mdi-trash-can-outline"> Eliminar </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn id="text" @click.prevent="editInfo" prepend-icon="mdi-pencil-outline">
+                <v-spacer></v-spacer>
+        <v-btn id="text" @click.prevent="editInfo" prepend-icon="mdi-square-edit-outline">
           Editar
         </v-btn>
-        <v-btn @click.prevent="goBack" id="text"> Atrás </v-btn>
+        <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
       </v-card-actions>
     </v-card>
     <v-card class="info" v-else>
@@ -80,7 +79,7 @@ export default {
       edit: false
     }
   },
-  async beforeCreate() {
+  async created() {
     const store = useAuthStore()
     const response = await api.getUsers()
     response.filter((el) => {
@@ -89,14 +88,14 @@ export default {
       }
     })
     const userInfo = await api.getUserInfo(this.id)
-    this.name = userInfo.name.toLocaleUpperCase()
-    this.surname = userInfo.surname.toLocaleUpperCase()
-    this.dni = userInfo.dni.toLocaleUpperCase()
+    this.name = userInfo.name
+    this.surname = userInfo.surname
+    this.dni = userInfo.dni
     this.email = userInfo.email
     this.phone = userInfo.phone
-    this.info.name = userInfo.name.toLocaleUpperCase()
-    this.info.surname = userInfo.surname.toLocaleUpperCase()
-    this.info.dni = userInfo.dni.toLocaleUpperCase()
+    this.info.name = userInfo.name
+    this.info.surname = userInfo.surname
+    this.info.dni = userInfo.dni
     this.info.email = userInfo.email
     this.info.phone = userInfo.phone
   },

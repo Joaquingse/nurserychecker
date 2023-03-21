@@ -1,17 +1,64 @@
 <template>
- <Workers/>
+  <v-container>
+    <v-row justify="end" class="pr-3">
+      <v-btn
+        @click.prevent=""
+        class="text"
+        v-if="role === 'admin' || role === 'owner'"
+        prepend-icon="mdi-plus-box-outline"
+      >
+        Añadir
+      </v-btn>
+      <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="6" md="4" v-for="(user, idx) in users" :key="idx">
+        <Workers :user="user" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import Workers from '../components/Workers.vue';
+import Workers from '../components/Workers.vue'
+import api from '../services/api'
+import { useAuthStore } from '../stores/store'
 
-  export default {
-    components:{
-      Workers
+export default {
+  data() {
+    return {
+      users: [],
+      role: ''
     }
+  },
+  components: {
+    Workers
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1)
+    }
+  },
+  async created() {
+    const store = useAuthStore()
+    const response = await api.getUsers()
+    response.filter((el) => {
+      if (el.role !== 'admin') this.users.push(el)
+    })
+    //this.users = response
+    this.role = store.role
   }
+}
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.text {
+  color: #06d6a0;
+  background-color: #073b4c;
+  margin-left: 15px;
+}
+.text:hover {
+  color: #ffffff;
+  background-color: #06d6a0;
+}
 </style>

@@ -5,9 +5,8 @@
         <v-app-bar color="#073B4C" class="navBar" app>
           <v-tooltip text="Menú" v-slot:activator="{ props }" location="bottom">
           <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" v-bind="props"> </v-app-bar-nav-icon>
-        </v-tooltip>
-          <v-toolbar-title>Nursery Checker</v-toolbar-title>
-          
+          </v-tooltip>
+          <v-toolbar-title>{{store.email}}</v-toolbar-title>
           <v-tooltip text="Salir" v-slot:activator="{ props }" location="bottom">
             <v-btn variant="text" icon="mdi-logout" @click="logout" v-bind="props"></v-btn>
           </v-tooltip>
