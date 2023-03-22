@@ -17,6 +17,15 @@ async function login(user) {
   }
 }
 
+async function signup(newUser) {
+  try {
+    const response = await API.post('/auth/signup', newUser)
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
 async function getUsers() {
   const store = useAuthStore()
   try {
@@ -67,9 +76,29 @@ async function updateUserInfo(id, info) {
   }
 }
 
+async function remUser(id){
+  const store = useAuthStore()
+  try {
+    const response = await API.delete(
+      `/user/${id}`,
+      {id:id},
+      {
+        headers: {
+          token: store.token
+        }
+      }
+    )
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   login,
+  signup,
   getUsers,
   getUserInfo,
-  updateUserInfo
+  updateUserInfo,
+  remUser
 }

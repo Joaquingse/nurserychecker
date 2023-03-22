@@ -29,17 +29,6 @@ export default {
   data() {
     return {}
   },
-  beforeMount(){
-    this.clearAll()
-  },
-  beforeUnmount(){
-    this.clearAll()
-  },
-  methods:{
-    clearAll(){
-     window.localStorage.clear()
-    }
-  }
 }
 </script>
 
@@ -49,6 +38,4 @@ export default {
   height: 100vh;
   max-width: 100vw;
 }
-
-
 </style>

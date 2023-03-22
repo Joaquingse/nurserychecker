@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="end" class="pr-3">
       <v-btn
-        @click.prevent=""
+        :to="{name: 'adduser'}"
         class="text"
         v-if="role === 'admin' || role === 'owner'"
         prepend-icon="mdi-plus-box-outline"
@@ -13,7 +13,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" sm="6" md="4" v-for="(user, idx) in users" :key="idx">
-        <Workers :user="user" />
+        <Workers :user="user" @remove_user="deleteUser" @edit_user="updateInfo" />
       </v-col>
     </v-row>
   </v-container>
@@ -37,6 +37,38 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1)
+    },
+    async deleteUser(id) {
+      const store = useAuthStore()
+      const idx = this.users.findIndex((el) => el._id === id)
+      if (store.isLoggedIn && this.role === 'admin') {
+        const response = await api.remUser(id)
+        this.users.splice(idx, 1)
+        return response
+      } else {
+        return alert('No tiene permiso para borrar usuarios')
+      }
+    },
+    async updateInfo(id, info) {
+      const store = useAuthStore()
+      if (this.role !== 'admin' && this.role !== 'owner') {
+        alert('No tiene permiso para realizar esta acción')
+      }
+      const response = await api.updateUserInfo(id, info)
+      if (response === 'error') {
+        Alert('No se pudo actualizar')
+      }
+
+      /*      const response = await api.updateUserInfo(id)
+      if (response === 'error') {
+        Alert('No se pudo actualizar')
+      } else {
+        this.name = 
+        this.surname = 
+        this.dni = 
+        this.email = 
+        this.phone = 
+      } */
     }
   },
   async created() {

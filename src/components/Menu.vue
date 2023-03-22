@@ -1,14 +1,14 @@
 <template>
   <div class="mt-4 mx-auto">
-    <v-btn size="x-large" rounded class="button" :to="{ name: 'children' }"> Lista de niños </v-btn>
+    <v-btn size="x-large"  class="button" :to="{ name: 'children' }"> Lista de niños </v-btn>
 
-    <v-btn size="x-large" rounded class="button" :to="{ name: 'inout' }"> Llegada-Salida </v-btn>
+    <v-btn size="x-large"  class="button" :to="{ name: 'inout' }"> Llegada-Salida </v-btn>
 
-    <v-btn size="x-large" rounded class="button" :to="{ name: 'events' }"> Eventos (D/S/M) </v-btn>
+    <v-btn size="x-large"  class="button" :to="{ name: 'events' }"> Eventos (D/S/M) </v-btn>
 
-    <v-btn size="x-large" rounded class="button" :to="{ name: 'workers' }"> Usuarios </v-btn>
+    <v-btn size="x-large"  class="button" :to="{ name: 'workers' }"> Usuarios </v-btn>
 
-    <v-btn size="x-large" rounded class="button" :to="{ name: 'nurseries' }"> Guradería/s </v-btn>
+    <v-btn size="x-large"  class="button" :to="{ name: 'nurseries' }"> Guradería/s </v-btn>
   </div>
 </template>
 

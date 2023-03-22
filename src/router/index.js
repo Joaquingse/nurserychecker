@@ -7,6 +7,7 @@ import EventView from '../views/EventView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import WorkersWiev from '../views/WorkersWiev.vue'
 import NurseriesView from '../views/NurseriesView.vue'
+import AddNewUserView from '../views/AddNewUserView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/workers',
       name: 'workers',
       component: WorkersWiev
+    },
+    {
+      path: '/adduser',
+      name: 'adduser',
+      component: AddNewUserView
     },
     {
       path: '/nurseries',

@@ -1,24 +1,23 @@
 <template>
-  <v-container class="row">
-    <v-row>
-      <v-col cols="12" sm="10" md="8" class="mx-auto">
+  <v-container class="">
+    <v-row id="row">
+      <v-col cols="12" md="8" class="mx-auto" id="a">
         <v-img
           src="https://res.cloudinary.com/burgerproject/image/upload/v1678192287/My%20images/logo_wh8syi.png"
           alt="logo"
           class="mx-auto logo"
         ></v-img>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="10" md="8" class="mx-auto">
-        <v-card class="pa-4 login">
-          <v-card-title id="text">Login</v-card-title>
+
+      <v-col cols="12" md="8" class="mx-auto" id="b">
+        <v-card class="pa-5" id="text">
+          <v-card-title >Login</v-card-title>
           <v-text-field
             label="Email"
             placeholder="Email"
             v-model="email"
             filled
-            rounded
+            
             dense
           ></v-text-field>
           <v-text-field
@@ -27,12 +26,15 @@
             placeholder="Password"
             v-model="password"
             filled
-            rounded
+            
             dense
             :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="visible = !visible"
           ></v-text-field>
-          <v-btn @click.prevent="loginUser" @keydown.enter="loginUser"> aceptar </v-btn>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn @click.prevent="loginUser" @keydown.enter="loginUser" class="button"> aceptar </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -80,16 +82,39 @@ export default {
 </script>
 
 <style scoped>
+
+.button{
+  color: #073b4c;
+  background-color: #118ab2;
+}
+
+.button:hover{
+  border: 2px solid #073b4c;
+  background-color: #06d6a0;
+}
+
+#text{
+  color: #073b4c;
+  background-color: #06d6a0;
+}
+
 @media (min-width: 720px) {
-  .row {
+  #row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'a b';
   }
-  .logo {
-    margin-top: 40%;
+
+  #a {
+    display: block;
+    grid-area: a;
+    width: 50vw;
+    margin: 10% auto;
   }
-  .login {
-    margin-top: 10%;
+  #b {
+    display: block;
+    grid-area: b;
+    width: 50vw;
+    margin: auto;
   }
 }
 </style>
