@@ -1,7 +1,9 @@
 <template>
-    <v-row>
-      llegadas y salidas
-     <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
+  <v-row>
+    llegadas y salidas
+    <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left-bold-box-outline">
+      Atrás
+    </v-btn>
   </v-row>
 </template>
 

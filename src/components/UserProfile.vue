@@ -10,11 +10,13 @@
       <v-card-text> E-mail: {{ email }} </v-card-text>
       <v-divider></v-divider>
       <v-card-actions class="button">
-                <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
         <v-btn class="text" @click.prevent="editInfo" prepend-icon="mdi-square-edit-outline">
           Editar
         </v-btn>
-        <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
+        <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-arrow-left-bold-box-outline">
+          Atrás
+        </v-btn>
       </v-card-actions>
     </v-card>
     <v-card class="info" v-else>
@@ -51,12 +53,18 @@
         v-model="info.email"
       ></v-text-field>
       <v-divider></v-divider>
-      <v-card-actions >
+      <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click.prevent="updateInfo"  prepend-icon="mdi-content-save-outline" class="text">
+        <v-btn @click.prevent="updateInfo" prepend-icon="mdi-content-save-outline" class="text">
           aceptar
         </v-btn>
-        <v-btn @click.prevent="editInfo"  prepend-icon="mdi-arrow-left" class="text"> Atrás </v-btn>
+        <v-btn
+          @click.prevent="editInfo"
+          prepend-icon="mdi-arrow-left-bold-box-outline"
+          class="text"
+        >
+          Atrás
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-col>

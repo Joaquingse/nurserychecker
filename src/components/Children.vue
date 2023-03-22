@@ -1,10 +1,11 @@
 <template>
   <v-row>
     lista de nenes
-    
-     <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
+
+    <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left-bold-box-outline">
+      Atrás
+    </v-btn>
   </v-row>
- 
 </template>
 
 <script>

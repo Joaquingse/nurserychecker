@@ -2,8 +2,10 @@
   <div>
     guarderias
     <v-row justify="end">
-     <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left"> Atrás </v-btn>
-  </v-row>
+      <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left-bold-box-outline">
+        Atrás
+      </v-btn>
+    </v-row>
   </div>
 </template>
 

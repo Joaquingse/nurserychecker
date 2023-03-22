@@ -16,15 +16,27 @@
         v-model="newUser.nursery"
       >
       </v-select>
-      <v-select label="Puesto" :items="role" v-model="newUser.role" v-if="store.role === 'admin'"></v-select>
+      <v-select
+        label="Puesto"
+        :items="role"
+        v-model="newUser.role"
+        v-if="store.role === 'admin'"
+      ></v-select>
       <v-select label="Puesto" :items="role2" v-model="newUser.role" v-else></v-select>
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click.prevent="addUser" prepend-icon="mdi-content-save-outline" class="text" :to="{name: 'workers'}">
+        <v-btn
+          @click.prevent="addUser"
+          prepend-icon="mdi-content-save-outline"
+          class="text"
+          :to="{ name: 'workers' }"
+        >
           aceptar
         </v-btn>
-        <v-btn @click.prevent="goBack" prepend-icon="mdi-arrow-left" class="text"> Atrás </v-btn>
+        <v-btn @click.prevent="goBack" prepend-icon="mdi-arrow-left-bold-box-outline" class="text">
+          Atrás
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-col>
@@ -52,7 +64,7 @@ export default {
       role: ['admin', 'owner', 'chief', 'worker'],
       role2: ['chief', 'worker'],
       nursery: [],
-      center: [],
+      center: []
     }
   },
   methods: {
@@ -60,13 +72,13 @@ export default {
       this.$router.go(-1)
     },
     async addUser() {
-      this.nursery.filter((el)=> {
-        if(el.name === this.newUser.nursery){
+      this.nursery.filter((el) => {
+        if (el.name === this.newUser.nursery) {
           this.newUser.nursery = el.id
         }
       })
-     const response = await api.signup(this.newUser)
-     return response
+      const response = await api.signup(this.newUser)
+      return response
     }
   },
   async created() {
