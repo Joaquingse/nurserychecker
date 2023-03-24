@@ -1,15 +1,17 @@
 <template>
   <v-container>
     <v-row justify="end" class="pr-3 ml-1" align-items="center">
-      Búsqueda: <v-text-field v-model="search"></v-text-field>
-
+      <!-- Elemento para fitrado por nombre -->
+      Búsqueda: <v-text-field variant="solo" v-model="search"></v-text-field>
       <v-spacer></v-spacer>
-      <v-btn @click.prevent="goBack" prepend-icon="mdi-arrow-left-bold-box-outline"  class="text"> Atrás </v-btn>
+      <v-btn @click.prevent="goBack" prepend-icon="mdi-arrow-left-bold-box-outline" class="text">
+        Atrás
+      </v-btn>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="10" md="8" >
-               <ChildrenList  :childrenList="childrenList" :search="search"/>
-              
+      <v-col cols="12" sm="10" md="8">
+        <!-- Componente que nos trae la lista de alumnos, en el que aplicamos el filtro -->
+        <ChildrenList :childrenList="childrenList" :search="search" />
       </v-col>
     </v-row>
   </v-container>
@@ -22,14 +24,14 @@ import { useAuthStore } from '../stores/store'
 import children from '../services/children'
 
 export default {
-  components: { 
+  components: {
     ChildrenList,
     ChildrenProfile
-   },
+  },
   data() {
     return {
       childrenList: [],
-      search: '',
+      search: ''
     }
   },
   methods: {
