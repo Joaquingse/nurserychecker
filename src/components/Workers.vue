@@ -105,7 +105,7 @@ export default {
     }
   },
   props: {
-    user: {}
+    user: Object
   },
   methods: {
     goBack() {
