@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <v-row justify="end">
-      <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-arrow-left-bold-box-outline">
-        Atrás
-      </v-btn>
+      <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
     </v-row>
     <v-row>
       <v-col cols="12" sm="10" md="8" class="mx-auto">

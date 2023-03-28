@@ -8,6 +8,7 @@ import ProfileView from '../views/ProfileView.vue'
 import WorkersWiev from '../views/WorkersWiev.vue'
 import NurseriesView from '../views/NurseriesView.vue'
 import AddNewUserView from '../views/AddNewUserView.vue'
+import AddChildView from '../views/AddChildView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +52,11 @@ const router = createRouter({
       path: '/adduser',
       name: 'adduser',
       component: AddNewUserView
+    },
+    {
+      path: '/addchild',
+      name: 'addchild',
+      component: AddChildView
     },
     {
       path: '/nurseries',

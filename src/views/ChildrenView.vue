@@ -1,15 +1,22 @@
 <template>
   <v-container>
-    <v-row justify="end" class="pr-3 ml-1" align-items="center">
-      <!-- Elemento para fitrado por nombre -->
-      Búsqueda: <v-text-field variant="solo" v-model="search"></v-text-field>
+    <v-row class="pr-3 ml-1">
+      <h2 class="info">Listado de alumnos</h2>
       <v-spacer></v-spacer>
-      <v-btn @click.prevent="goBack" prepend-icon="mdi-arrow-left-bold-box-outline" class="text">
-        Atrás
+      <v-btn
+        :to="{ name: 'addchild' }"
+        class="text"
+        v-if="role === 'admin' || role === 'owner'"
+        prepend-icon="mdi-plus"
+      >
+        Añadir
       </v-btn>
+      <v-btn @click.prevent="goBack" prepend-icon="mdi-chevron-left" class="text"> Atrás </v-btn>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="10" md="8">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
+        <!-- Elemento para fitrado por nombre -->
+        <v-text-field variant="solo" v-model="search" label="Búsqueda"></v-text-field>
         <!-- Componente que nos trae la lista de alumnos, en el que aplicamos el filtro -->
         <ChildrenList :childrenList="childrenList" :search="search" />
       </v-col>
@@ -31,7 +38,8 @@ export default {
   data() {
     return {
       childrenList: [],
-      search: ''
+      search: '',
+      role: ''
     }
   },
   methods: {
@@ -41,6 +49,7 @@ export default {
   },
   async created() {
     const store = useAuthStore()
+    this.role = store.role
     const response = await children.getChildren()
     response.forEach((el) => {
       this.childrenList.push(el)
@@ -58,5 +67,9 @@ export default {
 .text:hover {
   color: #ffffff;
   background-color: #06d6a0;
+}
+
+.info {
+  color: #ffffff;
 }
 </style>

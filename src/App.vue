@@ -20,6 +20,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
+import {useAuthStore} from './stores/store'
 
 
 export default {
@@ -29,7 +30,7 @@ export default {
   },
   data() {
     return {}
-  }
+  },
 }
 </script>
 

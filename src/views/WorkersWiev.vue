@@ -5,13 +5,11 @@
         :to="{ name: 'adduser' }"
         class="text"
         v-if="role === 'admin' || role === 'owner'"
-        prepend-icon="mdi-plus-box-outline"
+        prepend-icon="mdi-plus"
       >
         Añadir
       </v-btn>
-      <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-arrow-left-bold-box-outline">
-        Atrás
-      </v-btn>
+      <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
     </v-row>
     <v-row>
       <v-col cols="12" sm="6" md="4" v-for="(user, idx) in users" :key="idx">

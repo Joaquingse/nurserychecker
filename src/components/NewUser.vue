@@ -34,9 +34,7 @@
         >
           aceptar
         </v-btn>
-        <v-btn @click.prevent="goBack" prepend-icon="mdi-arrow-left-bold-box-outline" class="text">
-          Atrás
-        </v-btn>
+        <v-btn @click.prevent="goBack" prepend-icon="mdi-chevron-left" class="text"> Atrás </v-btn>
       </v-card-actions>
     </v-card>
   </v-col>
