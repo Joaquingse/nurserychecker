@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="pr-3 ml-1">
+    <v-row class="pr-3 ml-1" justify="end">
       <h2 class="info">Listado de alumnos</h2>
       <v-spacer></v-spacer>
       <v-btn

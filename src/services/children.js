@@ -23,6 +23,22 @@ async function getChildren() {
   }
 }
 
+async function getChild(id) {
+  const store = useAuthStore()
+  try {
+    const response = await API.get(`/child/${id}`, 
+    {id: id}, 
+    {
+      headers: {
+        token: store.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
 async function addChild(newChild) {
   const store = useAuthStore()
   try {
@@ -41,5 +57,6 @@ async function addChild(newChild) {
 
 export default {
   getChildren,
+  getChild,
   addChild,
 }
