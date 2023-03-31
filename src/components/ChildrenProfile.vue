@@ -2,19 +2,19 @@
   <v-row>
     <v-col>
       <v-card>
-        <v-list>
+        <v-list class="info">
           <v-list-group>
             <template v-slot:activator="{ props }">
               <v-list-item v-bind="props" :title="child.name + ' ' + child.surname"> </v-list-item>
             </template>
-
+            <v-divider color="white"></v-divider>
             <!-- Info tutors -->
             <v-list-group value="Tutors">
               <template v-slot:activator="{ props }">
                 <v-list-item v-bind="props" title="Familia/Tutores"></v-list-item>
               </template>
               <v-expansion-panels v-for="(tutor, idx) in child.tutors" :key="idx">
-                <v-expansion-panel>
+                <v-expansion-panel class="info">
                   <v-expansion-panel-title>
                     {{ tutor.name + ' ' + tutor.surname }}
                   </v-expansion-panel-title>
@@ -24,7 +24,7 @@
                 </v-expansion-panel>
               </v-expansion-panels>
             </v-list-group>
-
+            <v-divider color="white"></v-divider>
             <!--  Info nursery, no need to show in first time  -->
             <!--   
     <v-list-group value="Nursery">
@@ -35,12 +35,13 @@
         <v-list-item prepend-icon="mdi-email-outline" :title="child.nursery.email"> </v-list-item>
       </v-list-group>
  -->
+            <v-divider color="white"></v-divider>
             <v-list-item title="Comedor: NO" v-if="child.dinner === false"></v-list-item>
             <v-list-item title="Comedor: SÍ" v-else></v-list-item>
-
+            <v-divider color="white"></v-divider>
             <v-list-item title="Recogida temprana: NO" v-if="child.early === false"></v-list-item>
             <v-list-item title="Recogida temprana: SÍ" v-else></v-list-item>
-
+            <v-divider color="white"></v-divider>
             <v-list-group value="Alergies">
               <template v-slot:activator="{ props }">
                 <v-list-item v-bind="props" title="Alergias"> </v-list-item>
@@ -51,7 +52,7 @@
                 :title="alergie"
               ></v-list-item>
             </v-list-group>
-
+            <v-divider color="white"></v-divider>
             <v-list-group value="Activities">
               <template v-slot:activator="{ props }">
                 <v-list-item v-bind="props" title="Actividades"> </v-list-item>
@@ -63,41 +64,47 @@
               ></v-list-item>
             </v-list-group>
           </v-list-group>
-          <v-list-item-action class="pr-2">
+
+        </v-list>
+        <v-card-actions class="pr-2" v-if="role !== 'worker'">
             <v-spacer></v-spacer>
             <v-btn
               class="text"
               append-icon="mdi-square-edit-outline"
-              size="x-small"
-              :to="{ name:'editchild' , params: {id: this.child._id}}"
+              size="small"
+              :to="{ name: 'editchild', params: { id: this.child._id } }"
+              v-if="role !== 'worker'"
               >editar</v-btn
             >
-            <v-btn class="text" append-icon="mdi-trash-can-outline" size="x-small">eliminar</v-btn>
-          </v-list-item-action>
-        </v-list>
+            <v-btn class="text" append-icon="mdi-trash-can-outline" size="small" v-if="role === 'admin' || role === 'owner'">eliminar</v-btn>
+          </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import { useAuthStore } from '../stores/store';
 export default {
   props: {
     child: Object
   },
   data() {
     return {
+      store: useAuthStore(),
+      role: '',
       children: []
     }
   },
   methods: {
-    editChild(){
-      
-    }
+    editChild() {}
   },
   computed: {},
   created() {
     this.children.push(this.child)
+  },
+  created(){
+    this.role = this.store.role
   }
 }
 </script>
@@ -112,5 +119,10 @@ export default {
 .text:hover {
   color: #073b4c;
   background-color: #06d6a0;
+}
+
+.info {
+  color: #ffffff;
+  background-color: #073b4c;
 }
 </style>

@@ -36,7 +36,37 @@ async function addTutor(newTutor) {
   }
 }
 
+async function updateTutor(id,info) {
+  const store = useAuthStore()
+  try {
+    const response = await API.put(`/tutor/${id}`, info, {
+      headers: {
+        token: store.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
+async function deleteTutor(id) {
+  const store = useAuthStore()
+  try {
+    const response = await API.delete(`/tutor/${id}`, {
+      headers: {
+        token: store.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
 export default {
   getTutors,
-  addTutor
+  addTutor,
+  updateTutor,
+  deleteTutor
 }

@@ -53,10 +53,25 @@ async function addChild(newChild) {
   }
 }
 
+async function updateChild(id,info) {
+  const store = useAuthStore()
+  try {
+    const response = await API.put(`/child/${id}`, info, {
+      headers: {
+        token: store.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
 
 
 export default {
   getChildren,
   getChild,
   addChild,
+  updateChild,
 }
