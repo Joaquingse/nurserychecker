@@ -97,7 +97,7 @@ export default {
     }
   },
   methods: {
-    editChild() {}
+
   },
   computed: {},
   created() {

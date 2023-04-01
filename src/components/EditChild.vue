@@ -1,13 +1,9 @@
 <template>
   <v-row>
     <v-col cols="12" sm="10" md="8" class="mx-auto">
-      <v-card class="info" v-if="tutorInfo === false">
+      <v-card class="info">
         <v-card-title class="title">
-          <p>Datos de Alumn@</p>
-
-          <v-btn class="text" prepend-icon="mdi-square-edit-outline" @click.prevent="tutorsInfo"
-            >Editar Familiar/Tutor
-          </v-btn>
+          <p>Editar datos de Alumn@</p>
         </v-card-title>
 
         <v-divider></v-divider>
@@ -59,82 +55,37 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-
-      <v-container v-if="tutorInfo === true">
-        <v-row class="pr-3 ml-1" justify="end">
-          <h2>Familiares/Tutores</h2>
-          <v-spacer></v-spacer>
-          <v-btn
-            :to="{  }"
-            class="text"
-            v-if="role === 'admin' || role === 'owner'"
-            prepend-icon="mdi-plus"
-          >
-            Añadir
-          </v-btn>
-          <v-btn @click.prevent="tutorInfo = !tutorInfo" prepend-icon="mdi-chevron-left" class="text ml-4">
-            Atrás
-          </v-btn>
-        </v-row>
-        <v-row>
-          <v-col cols="12" sm="6" v-for="(tutor, idx) in tutors" :key="idx">
-            <Tutors :tutor="tutor" />
-          </v-col>
-        </v-row>
-      </v-container>
     </v-col>
   </v-row>
 </template>
 
 <script>
 import children from '../services/children'
-import tutors from '../services/tutors'
 import { useAuthStore } from '../stores/store'
-import Tutors from './Tutors.vue'
 
 export default {
-  components: {
-    Tutors
-  },
   props: {
     child: Object
   },
   data() {
     return {
       store: useAuthStore(),
-      tutorInfo: false,
-      tutors: [],
-      newInfo: {
-        name: '',
-        surname: '',
-        dni: '',
-        email: '',
-        pnone: ''
-      },
-      role:''
+      role: ''
     }
   },
   methods: {
     goBack() {
       this.$router.go(-1)
     },
-    tutorsInfo() {
-      this.tutorInfo = true
-      this.tutors = this.child.tutors
-    },
+
     async updateChild() {
       const response = await children.updateChild(this.child._id, this.child)
       this.$router.push({ name: 'children' })
       return response
-    }
-    /*     async updateTutor(id) {
-      const response = await tutors.updateTutor(id, this.newInfo)
-      this.$router.push({ name: 'children' })
-      return response
-    } 
-    */
+    },
+
   },
-  created(){
+  created() {
     this.role = this.store.role
   }
 }
@@ -156,7 +107,8 @@ export default {
   background-color: #06d6a0;
 }
 
-p, h2 {
+p,
+h2 {
   display: inline-block;
   color: white;
 }
@@ -164,6 +116,16 @@ p, h2 {
 .title {
   display: flex;
   justify-content: space-between;
+}
+
+.tutor {
+  width: 300px;
+  padding: 0 15px;
+}
+
+.tutorAdd {
+  width: 350px;
+  padding: 0 15px;
 }
 
 @media (min-width: 500px) {
