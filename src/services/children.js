@@ -67,11 +67,10 @@ async function updateChild(id,info) {
   }
 }
 
-
-
 export default {
   getChildren,
   getChild,
   addChild,
   updateChild,
+  
 }

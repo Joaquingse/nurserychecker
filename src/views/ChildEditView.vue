@@ -1,37 +1,32 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12" class="mx-auto">
+    <v-row v-if="tutorInfo === false">
+      <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
           <v-card-title>
             {{ child.name + ' ' + child.surname }}
           </v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              prepend-icon="mdi-square-edit-outline"
-              class="text"
-              @click="tutorInf"
-              v-if="tutorInfo === false"
-              >Editar Familia/Tutores</v-btn
-            >
-            <v-btn-group v-else density="compact">
-              <v-btn @click="" prepend-icon="mdi-plus" class="text" size="small">
-                Añadir Familiar/Tutor
-              </v-btn>
-              <v-btn @click="tutorInf" prepend-icon="mdi-chevron-left" class="text" size="small">
-                Volver a datos del/la alumn@
-              </v-btn>
-            </v-btn-group>
+            <v-btn prepend-icon="mdi-square-edit-outline" class="text" @click="tutorInf"
+              >Editar Familia/Tutores
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col>
+      <v-col cols="12" class="mx-auto">
         <EditChild :child="child" v-if="tutorInfo === false" />
-        <Tutors :tutors="tutors" v-else @remove_tutor="removeTutor" />
+        <Tutors
+          :child="child"
+          v-else
+          @remove_tutor="removeTutor"
+          @tutor_info="tutorInf"
+          @add_tutor_child="addTutor"
+          @add_tutor="addTutor"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -41,6 +36,7 @@
 import EditChild from '../components/EditChild.vue'
 import Tutors from '../components/Tutors.vue'
 import children from '../services/children'
+import tutors from '../services/tutors'
 import { useAuthStore } from '../stores/store'
 
 export default {
@@ -56,7 +52,8 @@ export default {
       store: useAuthStore(),
       child: {},
       tutors: [],
-      tutorInfo: false
+      tutorInfo: false,
+      info: {}
     }
   },
   methods: {
@@ -84,13 +81,19 @@ export default {
       } else {
         return alert('No tiene permiso para borrar usuarios')
       }
+    },
+
+    async addTutor(id, tutorId) {
+      this.child.tutors.push(tutorId)
+      const response = await children.updateChild(id,{ tutors:this.child.tutors })
+      this.child.tutors = response.tutors
     }
   },
   async created() {
     if (this.store.role !== 'worker') {
       const response = await children.getChild(this.id)
       this.child = response
-      this.tutors = response.tutors
+      this.tutors = this.child.tutors
     }
   }
 }
