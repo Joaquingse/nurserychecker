@@ -15,13 +15,13 @@
             </v-tooltip>
         </v-app-bar>
 
-        <v-navigation-drawer v-model="drawer" temporary color="rgba(117, 117, 117, 0.5)" floating>
+        <v-navigation-drawer v-model="drawer" temporary color="rgba(117, 117, 117, 0.25)" floating>
           <v-list nav>
             <v-list-item class="navBar list" rounded :to="{ name: 'children' }">
               ALUMNOS
             </v-list-item>
             <v-list-item class="navBar list" rounded :to="{ name: 'inout' }">
-              IN / OUT
+              LLEGADA/RECOGIDA
             </v-list-item>
             <v-list-item class="navBar list" rounded :to="{ name: 'events' }">
               EVENTOS
