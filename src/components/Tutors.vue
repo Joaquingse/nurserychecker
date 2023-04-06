@@ -20,6 +20,7 @@
                         label="Introduce un DNI"
                         hide-details="auto"
                         v-model="dni"
+                        variant="outlined"
                       ></v-text-field>
                     </v-card-text>
                     <v-card-actions>
