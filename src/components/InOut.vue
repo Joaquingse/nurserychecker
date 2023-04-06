@@ -139,6 +139,7 @@
 import emailjs from '@emailjs/browser'
 import tutors from '../services/tutors'
 import children from '../services/children'
+import inAndOut from '../services/inAndOut'
 import { useAuthStore } from '../stores/store'
 
 export default {
@@ -233,7 +234,7 @@ export default {
               date: new Date(),
               who: this.tutor._id
             }
-            console.log(dateIn)
+            this.kidIn(dateIn)
           }
         })
       })
@@ -251,13 +252,23 @@ export default {
               date: new Date(),
               who: this.tutor._id
             }
-            console.log(dateOut)
+            this.kidOut(dateOut)
           }
         })
       })
       this.kids = []
       this.kidId = []
     },
+
+    async kidIn(info) {
+      const response = await inAndOut.addDrops(info)
+      return response
+    },
+
+    async kidOut(info) {
+      const response = await inAndOut.addPicks(info)
+      return response
+    }
   },
 
   async created() {
