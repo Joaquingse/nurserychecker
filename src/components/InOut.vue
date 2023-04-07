@@ -163,7 +163,9 @@ export default {
       selectIn: false,
       selectOut: false,
       students: [],
+      parents: [],
       kids: [],
+      mails: [],
       kidId: []
     }
   },
@@ -207,6 +209,17 @@ export default {
         // usamos .some() para buscar dentro el array de tutores el ID dentro de cada objeto
         if (el.tutors.some((e) => e._id === this.tutor._id)) {
           this.kids.push(el)
+          el.tutors.filter((parent) => {
+            if (parent.relation === 'parents' && !this.mails.includes(parent.email)) {
+              this.mails.push(parent.email)
+            }
+            if (
+              parent.relation === 'parents' &&
+              !this.parents.includes(`${parent.name + ' ' + parent.surname}`)
+            ) {
+              this.parents.push(`${parent.name + ' ' + parent.surname}`)
+            }
+          })
         }
       })
     },
@@ -226,14 +239,23 @@ export default {
 
     saveIn() {
       this.selectIn = false
-      this.kids.forEach((el) => {
-        this.kidId.filter((id) => {
+      const dateIn = {
+        child: '',
+        date: new Date(),
+        who: this.tutor._id
+      }
+      this.kids.filter((el) => {
+        this.kidId.forEach((id) => {
           if (id === el._id) {
-            const dateIn = {
-              child: el._id,
-              date: new Date(),
-              who: this.tutor._id
-            }
+            dateIn.child = el._id
+            this.params.to_name = this.parents
+            this.params.from_name = 'Pepa Pig Nursery'
+            this.params.to_email = this.mails
+            this.params.message = `El/la alumn@ ${
+              el.name + ' ' + el.surname
+            } ha llegado al centro, entregado por ${this.tutor.name + ' ' + this.tutor.surname}`
+
+            this.sendEmail()
             this.kidIn(dateIn)
           }
         })
@@ -244,14 +266,23 @@ export default {
 
     saveOut() {
       this.selectOut = false
-      this.kids.forEach((el) => {
-        this.kidId.filter((id) => {
+      const dateOut = {
+        child: '',
+        date: new Date(),
+        who: this.tutor._id
+      }
+      this.kids.filter((el) => {
+        this.kidId.forEach((id) => {
           if (id === el._id) {
-            const dateOut = {
-              child: el._id,
-              date: new Date(),
-              who: this.tutor._id
-            }
+            dateOut.child = el._id
+            this.params.to_name = this.tutor.name
+            this.params.from_name = 'Pepa Pig Nursery'
+            this.params.to_email = this.mails
+            this.params.message = `El/la alumn@ ${
+              el.name + ' ' + el.surname
+            } ha llegado al centro, entregado por ${this.tutor.name + ' ' + this.tutor.surname}`
+
+            this.sendEmail()
             this.kidOut(dateOut)
           }
         })
