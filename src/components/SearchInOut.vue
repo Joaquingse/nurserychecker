@@ -8,7 +8,7 @@
             <v-text-field
               label="Alumn@"
               placeholder="Introduzca nombre"
-              v-model="kid.name"
+              v-model="kid"
               variant="outlined"
             ></v-text-field>
             <v-card-actions>
@@ -27,7 +27,7 @@
             <v-text-field
               label="Tutor"
               placeholder="Introduzca nombre"
-              v-model="tutor.name"
+              v-model="tutor"
               variant="outlined"
             ></v-text-field>
             <v-card-actions>
@@ -47,7 +47,7 @@
               label="Fecha"
               placeholder="Introduzca fecha"
               type="date"
-              v-model="day.date"
+              v-model="day"
               variant="outlined"
             ></v-text-field>
             <v-card-actions>
@@ -70,20 +70,34 @@ export default {
   data() {
     return {
       students: [],
+      itemChild: [],
       legals: [],
+      itemTutor: [],
       dropsOff: [],
       picksUp: [],
-      kid: {},
-      tutor: {},
-      day: {}
+      kid: '',
+      tutor: '',
+      day: ''
     }
   },
   methods: {
-    getDay() {
-      const date = new Date(this.day.date).toLocaleDateString()
-      console.log(date)
+    async getDay() {
+      const date = new Date(this.day).toLocaleDateString()
+      this.dropsOff.filter((el) => {
+        const day = new Date(el.date).toLocaleDateString()
+        if (day === date) {
+          console.log(el)
+        }
+      })
+      this.picksUp.filter((el) => {
+        const day = new Date(el.date).toLocaleDateString()
+        if (day === date) {
+          console.log(el)
+        }
+      })
     }
   },
+
   async created() {
     const kids = await children.getChildren()
     const adults = await tutors.getTutors()
@@ -93,6 +107,12 @@ export default {
     this.legals = [...adults]
     this.dropsOff = [...drops]
     this.picksUp = [...picks]
+    this.students.forEach((el) => {
+      this.itemChild.push(el.name + ' ' + el.surname)
+    })
+    this.legals.forEach((el) => {
+      this.itemTutor.push(el.name + ' ' + el.surname)
+    })
   }
 }
 </script>

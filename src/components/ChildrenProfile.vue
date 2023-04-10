@@ -102,10 +102,8 @@ export default {
   computed: {},
   created() {
     this.children.push(this.child)
-  },
-  created(){
     this.role = this.store.role
-  }
+  },
 }
 </script>
 
