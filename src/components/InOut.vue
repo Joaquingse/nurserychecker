@@ -1,10 +1,20 @@
 <template>
   <v-container>
-    <!-- Seleccion llegada o salida -->
+    <!-- Seleccion consultas, llegada o salida -->
     <v-row>
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
-          <v-card-title> Seleccione una acción: </v-card-title>
+          <v-card-actions>
+            <v-card-title> Seleccione una acción: </v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn class="text" prepend-icon="mdi-magnify" :to="{ name: 'search' }">
+              Consultar
+            </v-btn>
+            <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left">
+              Atrás
+            </v-btn>
+          </v-card-actions>
+
           <v-card-actions>
             <v-btn class="text" block @click.prevent=";(getIn = true), (getOut = false)"
               >Llegada (entrada en el centro)</v-btn
@@ -31,7 +41,10 @@
               v-model="dni"
               variant="outlined"
             ></v-text-field>
-            <v-btn class="text btn" prepend-icon="mdi-magnify" @click="findDniIn"
+            <v-btn
+              class="text btn"
+              prepend-icon="mdi-magnify"
+              @click.prevent="findDniIn"
               >buscar
               <v-dialog v-if="alert === true" activator="parent" max-width="400px">
                 <v-card>
@@ -60,7 +73,10 @@
               v-model="dni"
               variant="outlined"
             ></v-text-field>
-            <v-btn class="text btn" prepend-icon="mdi-magnify" @click="findDniOut"
+            <v-btn
+              class="text btn"
+              prepend-icon="mdi-magnify"
+              @click="findDniOut"
               >buscar
               <v-dialog v-if="alert === true" activator="parent" max-width="400px">
                 <v-card>
@@ -76,7 +92,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <!-- Datos y registro -->
+    <!-- Datos y registro llegada -->
     <v-row v-if="selectIn === true">
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
@@ -104,9 +120,9 @@
         </v-card>
       </v-col>
     </v-row>
+    <!-- Datos y registro salida -->
     <v-row v-if="selectOut === true">
       <v-col cols="12" sm="10" class="mx-auto">
-        <!-- Datos y registro -->
         <v-card class="info">
           <v-card-title>
             {{ tutor.name + ' ' + tutor.surname }}

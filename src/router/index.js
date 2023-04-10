@@ -10,6 +10,7 @@ import NurseriesView from '../views/NurseriesView.vue'
 import AddNewUserView from '../views/AddNewUserView.vue'
 import AddChildView from '../views/AddChildView.vue'
 import ChildEditView from '../views/ChildEditView.vue'
+import SearchInOutView from '../views/SearchInOutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,6 +70,11 @@ const router = createRouter({
       path: '/nurseries',
       name: 'nurseries',
       component: NurseriesView
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchInOutView
     },
     {
       path: '/about',
