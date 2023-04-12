@@ -32,7 +32,15 @@
     <v-row v-if="getIn === true">
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
-          <v-card-title> Llegada: </v-card-title>
+          <v-card-title class="box">
+            Llegada:
+            <v-btn
+              icon="mdi-close-circle-outline"
+              flat
+              class="close"
+              @click="getIn = false"
+            ></v-btn>
+          </v-card-title>
           <v-card-text class="box">
             <!-- Busqueda por DNI -->
             <v-text-field
@@ -41,10 +49,7 @@
               v-model="dni"
               variant="outlined"
             ></v-text-field>
-            <v-btn
-              class="text btn"
-              prepend-icon="mdi-magnify"
-              @click.prevent="findDniIn"
+            <v-btn class="text btn" prepend-icon="mdi-magnify" @click.prevent="findDniIn"
               >buscar
               <v-dialog v-if="alert === true" activator="parent" max-width="400px">
                 <v-card>
@@ -64,7 +69,14 @@
     <v-row v-if="getOut === true">
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
-          <v-card-title> Salida: </v-card-title>
+          <v-card-title class="box"> Salida: 
+            <v-btn
+              icon="mdi-close-circle-outline"
+              flat
+              class="close"
+              @click="getOut = false"
+            ></v-btn>
+          </v-card-title>
           <v-card-text class="box">
             <!-- Busqueda por DNI -->
             <v-text-field
@@ -73,10 +85,7 @@
               v-model="dni"
               variant="outlined"
             ></v-text-field>
-            <v-btn
-              class="text btn"
-              prepend-icon="mdi-magnify"
-              @click="findDniOut"
+            <v-btn class="text btn" prepend-icon="mdi-magnify" @click="findDniOut"
               >buscar
               <v-dialog v-if="alert === true" activator="parent" max-width="400px">
                 <v-card>
@@ -96,8 +105,14 @@
     <v-row v-if="selectIn === true">
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
-          <v-card-title>
+          <v-card-title class="box">
             {{ tutor.name + ' ' + tutor.surname }}
+            <v-btn
+              icon="mdi-close-circle-outline"
+              flat
+              class="close"
+              @click="selectIn = false"
+            ></v-btn>
           </v-card-title>
           <v-card-text>
             Alumn@/s:
@@ -124,8 +139,14 @@
     <v-row v-if="selectOut === true">
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
-          <v-card-title>
-            {{ tutor.name + ' ' + tutor.surname }}
+          <v-card-title class="box">
+            {{ tutor.name + ' ' + tutor.surname }}             
+            <v-btn
+              icon="mdi-close-circle-outline"
+              flat
+              class="close"
+              @click="selectOut = false"
+            ></v-btn>
           </v-card-title>
           <v-card-text>
             Alumn@/s:
@@ -192,15 +213,15 @@ export default {
 
     findDniIn() {
       this.tutors.filter((el) => {
-        if (this.dni.toUpperCase() === el.dni.toUpperCase()) {
+        if (this.dni.toUpperCase() !== el.dni.toUpperCase() || this.dni === '') {
+          this.alert = true
+        } else {
           this.selectIn = true
           this.getIn = false
           this.tutor = el
           this.getKids()
           this.alert = false
           this.dni = ''
-        } else {
-          this.alert = true
         }
       })
     },
@@ -330,6 +351,11 @@ export default {
 <style scoped>
 .info {
   color: #ffffff;
+  background-color: #073b4c;
+}
+
+.close {
+  color: #06d6a0;
   background-color: #073b4c;
 }
 

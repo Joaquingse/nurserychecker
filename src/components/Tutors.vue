@@ -177,7 +177,7 @@ export default {
     addTutor() {
       this.dniYes = false
       this.dialog = false
-      this.$emit('add_tutor',this.child._id, this.tutorId)
+      this.$emit('add_tutor', this.child._id, this.tutorId)
     },
 
     // accion en escucha para eliminar del array el tutor
@@ -218,12 +218,12 @@ export default {
     async findDni() {
       const allTutors = await tutors.getTutors()
       allTutors.filter((el) => {
-        if (el.dni.toUpperCase() === this.dni.toUpperCase()) {
-          this.tutorId = el._id
-          this.dniYes = true
-        } else {
+        if (el.dni.toUpperCase() !== this.dni.toUpperCase()) {
           this.dniNo = true
           this.info.dni = this.dni
+        } else {
+          this.tutorId = el._id
+          this.dniYes = true
         }
       })
     }
@@ -231,8 +231,7 @@ export default {
 
   created() {
     this.role = this.store.role
-  },
-
+  }
 }
 </script>
 

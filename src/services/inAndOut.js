@@ -22,6 +22,20 @@ async function getDrops() {
   }
 }
 
+async function getDrop(id) {
+  const store = useAuthStore()
+  try {
+    const response = await API.get(`/inout/drops?${child= id}`, {
+      headers: {
+        token: store.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
 async function getPicks() {
   const store = useAuthStore()
   try {
@@ -68,6 +82,7 @@ async function addPicks(info) {
 
 export default {
   getDrops,
+  getDrop,
   getPicks,
   addDrops,
   addPicks,

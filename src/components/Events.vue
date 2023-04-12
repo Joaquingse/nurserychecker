@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="end">
-      <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
+      <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
     </v-row>
     <v-row>
       <v-col cols="12" sm="10" md="8" class="mx-auto">
@@ -26,12 +26,12 @@ export default {
 </script>
 
 <style scoped>
-#text {
+.text {
   color: #06d6a0;
   background-color: #073b4c;
 }
 
-#text:hover {
+.text:hover {
   color: #073b4c;
   background-color: #06d6a0;
 }
