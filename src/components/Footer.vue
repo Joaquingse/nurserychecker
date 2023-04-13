@@ -25,8 +25,9 @@ export default {
 
 <style scoped>
 #text {
-  color: #06d6a0;
-  height: 100px;
-  width: 100vw;
+  color: #06d6a0; 
+     width: 100%;
+    height: 80px;
 }
+
 </style>

@@ -1,23 +1,33 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12" sm="10" md="8" class="mx-auto box">
+  <v-container id="row">
+    <v-row id="top">
+      <v-col cols="12" sm="11" class="mx-auto box">
         <h2 style="color: white">Consultas:</h2>
         <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Búsqueda por alumn@ -->
-    <v-row>
-      <v-col cols="12" sm="10" md="8" class="mx-auto">
+    <v-row id="left">
+      <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
           <v-card-item density="compact">
             <v-card-title class=""> Búsqueda por alumn@ </v-card-title>
+            <v-row class="pt-5">
+              <v-checkbox v-model="dropOrPick" label="Llegadas" value="drop"> </v-checkbox>
+              <v-checkbox v-model="dropOrPick" label="Salidas" value="pick"> </v-checkbox>
+            </v-row>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn variant="outlined" v-if="list === false && dropsResult === false" @click="list = true, noDrop = false"
+              <v-btn
+                variant="outlined"
+                v-if="list === false && dropsResult === false"
+                @click=";(list = true), (noDrop = false)"
                 >ver listado de alumn@s
               </v-btn>
-              <v-btn variant="outlined" v-if="list === true && dropsResult === false" @click="list = false"
+              <v-btn
+                variant="outlined"
+                v-if="list === true && dropsResult === false"
+                @click="list = false"
                 >cerrar listado</v-btn
               >
               <v-btn variant="outlined" v-if="dropsResult === true" @click="closeResult"
@@ -41,17 +51,12 @@
               :list="list"
               @search_child="searchChild"
             />
-            <dropsInfo :drops="drops" v-if="dropsResult" />
-            <v-card-item v-if="noDrop === true">
-              <v-card-text>
-                No se han encontrado resultados.
-              </v-card-text>
-            </v-card-item>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <!-- Búsqueda por tutor -->
+
+    <!--  Búsqueda por tutor // implementacion futura posible 
     <v-row>
       <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
@@ -71,9 +76,10 @@
         </v-card>
       </v-col>
     </v-row>
+ -->
     <!-- Búsqueda por fecha -->
-    <v-row>
-      <v-col cols="12" sm="10" md="8" class="mx-auto">
+    <v-row id="right">
+      <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
           <v-card-title> Búsqueda por fecha </v-card-title>
           <v-card-text>
@@ -92,11 +98,20 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-row id="bottom">
+      <v-col cols="12" sm="11" class="mx-auto">
+        <dropsInfo :drops="drops" v-if="dropsResult" />
+        <v-card v-else>
+          <v-card-text> No se han encontrado resultados. </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import tutors from '../services/tutors'
+//import tutors from '../services/tutors'
 import children from '../services/children'
 import inAndOut from '../services/inAndOut'
 import SearchByChild from './SearchByChild.vue'
@@ -108,19 +123,19 @@ export default {
       students: [],
       search: '',
       itemChild: [],
-      legals: [],
-      itemTutor: [],
+      //legals: [],
+      //itemTutor: [],
       dropsOff: [],
       picksUp: [],
       kid: '',
-      tutor: '',
+      // tutor: '',
       day: '',
       list: false,
       drops: [],
+      dropOrPick: '',
       dropsResult: false,
       picks: [],
-      picksResult: false,
-      noDrop: false,
+      picksResult: false
     }
   },
   components: {
@@ -153,39 +168,38 @@ export default {
         }
       })
     },
-    async searchChild(a, b) {
-      this.students.filter((el) => {
-        if (a + ' ' + b === el.name + ' ' + el.surname) {
-          this.kid = el._id
-        }
-      })
+    async searchChild(id) {
+      // this.students.filter((el) => {
+      //   if (
+      //     id === el._id
+      //   ) {
+      //     this.kid = el._id
+      //   }
+      // })
       this.dropsOff.filter((drop) => {
-        if (this.kid !== drop.child._id.toLocaleString()) {
-          this.noDrop = true
-          this.dropsResult = false
-        } else {
+        if (id === drop.child._id) {
           this.drops.push(drop)
-          this.dropsResult = true
         }
       })
+      this.dropsResult = true
       this.list = false
     }
   },
   async created() {
     const kids = await children.getChildren()
-    const adults = await tutors.getTutors()
+    //const adults = await tutors.getTutors()
     const drops = await inAndOut.getDrops()
     const picks = await inAndOut.getPicks()
     this.students = [...kids]
-    this.legals = [...adults]
+    //this.legals = [...adults]
     this.dropsOff = [...drops]
     this.picksUp = [...picks]
     this.students.forEach((el) => {
       this.itemChild.push(el.name + ' ' + el.surname)
     })
-    this.legals.forEach((el) => {
-      this.itemTutor.push(el.name + ' ' + el.surname)
-    })
+    // this.legals.forEach((el) => {
+    //   this.itemTutor.push(el.name + ' ' + el.surname)
+    // })
   }
 }
 </script>
@@ -206,5 +220,33 @@ export default {
 .box {
   display: flex;
   justify-content: space-between;
+}
+
+@media (min-width: 720px) {
+  #row {
+    display: grid;
+    grid-template-areas:
+      'top top'
+      'left right'
+      'bottom bottom';
+  }
+
+  #left {
+    display: inline-block;
+    grid-area: left;
+  }
+  #right {
+    display: inline-block;
+    grid-area: right;
+  }
+
+  #top {
+    display: block;
+    grid-area: top;
+  }
+  #bottom {
+    display: block;
+    grid-area: bottom;
+  }
 }
 </style>

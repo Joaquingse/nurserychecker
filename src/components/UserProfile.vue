@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" md="8" l="6" class="mx-auto">
+  <v-col cols="12" md="8" lg="6" class="mx-auto">
     <v-card class="info" v-if="!edit">
       <v-card-title>Datos de usuario </v-card-title>
       <v-divider></v-divider>

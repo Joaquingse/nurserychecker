@@ -1,15 +1,17 @@
 <template>
-  <div class="mt-4 mx-auto">
-    <v-btn size="x-large"  class="button" :to="{ name: 'children' }"> Lista de niños </v-btn>
+  <v-row>
+    <v-col cols="8" class="mt-4 mx-auto">
+      <v-btn size="x-large" class="button" :to="{ name: 'children' }"> Lista de niños </v-btn>
 
-    <v-btn size="x-large"  class="button" :to="{ name: 'inout' }"> Llegada/Recogida </v-btn>
+      <v-btn size="x-large" class="button" :to="{ name: 'inout' }"> Llegada/Recogida </v-btn>
 
-    <v-btn size="x-large"  class="button" :to="{ name: 'events' }"> Eventos (D/S/M) </v-btn>
+      <v-btn size="x-large" class="button" :to="{ name: 'events' }"> Eventos (D/S/M) </v-btn>
 
-    <v-btn size="x-large"  class="button" :to="{ name: 'workers' }"> Usuarios </v-btn>
+      <v-btn size="x-large" class="button" :to="{ name: 'workers' }"> Usuarios </v-btn>
 
-    <v-btn size="x-large"  class="button" :to="{ name: 'nurseries' }"> Guradería/s </v-btn>
-  </div>
+      <v-btn size="x-large" class="button" :to="{ name: 'nurseries' }"> Guradería/s </v-btn>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -30,7 +32,7 @@ export default {
   display: block;
   color: #06d6a0;
   background-color: #073b4c;
-  width: 300px;
+  
   margin: 20px auto;
   text-align: center;
   padding-top: 15px;

@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row class="mt-2 mb-2">
     <v-col cols="12">
       <v-card class="info">
         <v-card-title> Añadir Alumn@: </v-card-title>

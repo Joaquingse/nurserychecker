@@ -1,17 +1,11 @@
 <template>
   <v-app id="app">
     <v-main>
-      <v-row>
-        <NavBar />
-      </v-row>
-      <v-row>
-        <v-col cols="12" class="mx-auto mt-2">
-          <RouterView />
-        </v-col>
-      </v-row>
-      <v-row>
-        <Footer />
-      </v-row>
+      <NavBar />
+
+      <RouterView />
+
+      <Footer />
     </v-main>
   </v-app>
 </template>
@@ -20,17 +14,16 @@
 import { RouterLink, RouterView } from 'vue-router'
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
-import {useAuthStore} from './stores/store'
-
+import { useAuthStore } from './stores/store'
 
 export default {
   components: {
     NavBar,
-    Footer,
+    Footer
   },
   data() {
     return {}
-  },
+  }
 }
 </script>
 
@@ -38,6 +31,7 @@ export default {
 #app {
   background-color: #118ab2;
   height: 100vh;
+  margin: 0;
   max-width: 100vw;
 }
 </style>

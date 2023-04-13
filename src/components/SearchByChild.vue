@@ -4,7 +4,7 @@
       <v-list v-for="(child, idx) in filterChild" :key="idx" class="info" density="compact">
         <v-list-item
           :title="child.name + ' ' + child.surname"
-          @click="searchChild(child.name, child.surname)"
+          @click="searchChild(child._id)"
         >
         </v-list-item>
       </v-list>
@@ -27,8 +27,8 @@ export default {
     }
   },
   methods: {
-    searchChild(a, b) {
-      this.$emit('search_child', a, b)
+    searchChild(id) {
+      this.$emit('search_child', id)
     }
   }
 }
