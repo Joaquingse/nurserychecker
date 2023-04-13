@@ -2,11 +2,9 @@
   <v-app id="app">
     <v-main>
       <NavBar />
-
       <RouterView />
-
-      <Footer />
     </v-main>
+    <Footer />
   </v-app>
 </template>
 
@@ -30,7 +28,7 @@ export default {
 <style scoped>
 #app {
   background-color: #118ab2;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   max-width: 100vw;
 }

@@ -50,6 +50,21 @@ async function getPicks() {
   }
 }
 
+async function getPick(id) {
+  const store = useAuthStore()
+  try {
+    const response = await API.get(`/inout/picks?${child= id}`, {
+      headers: {
+        token: store.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
+
 async function addDrops(info) {
   const store = useAuthStore()
   try {
@@ -84,6 +99,7 @@ export default {
   getDrops,
   getDrop,
   getPicks,
+  getPick,
   addDrops,
   addPicks,
 }
