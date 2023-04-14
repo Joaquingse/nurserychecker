@@ -1,77 +1,61 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto box">
+      <v-col cols="12" class="mx-auto box">
         <h2 style="color: white">Consultas:</h2>
         <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Búsqueda por alumn@ y Búsqueda por fecha -->
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto">
-        <v-row>
-          <!-- busqueda por alumno -->
-          <v-col cols="12" md="6" class="mx-auto">
-            <v-card class="info" height="145px">
-              <v-card-item density="compact">
-                <v-card-title class="mb-2"> Búsqueda por alumn@: </v-card-title>
-                <v-card-actions class="mt-6">
-                  <v-spacer></v-spacer>
-                  <!-- ver listado de alumnos -->
-                  <v-btn
-                    variant="outlined"
-                    v-if="list === false && dropsResult === false && picksResult === false"
-                    @click="list = true"
-                    >ver listado de alumn@s
-                  </v-btn>
-                  <!-- cerrar listado de alumnos -->
-                  <v-btn
-                    variant="outlined"
-                    v-if="
-                      (list === true && dropsResult === false) ||
-                      (list === true && picksResult === false)
-                    "
-                    @click="list = false"
-                    >cerrar listado</v-btn
-                  >
-                  <!-- cerrar la respuesta y volver al listado de alumnos -->
-                  <v-btn
-                    variant="outlined"
-                    v-if="dropsResult === true || picksResult === true"
-                    @click="closeResult"
-                    >Volver</v-btn
-                  >
-                </v-card-actions>
-              </v-card-item>
-            </v-card>
-          </v-col>
-          <!-- busqueda por fecha -->
-          <v-col cols="12" md="6" class="mx-auto">
-            <v-card class="info">
-              <v-card-title> Búsqueda por fecha: </v-card-title>
-              <v-card-text class="box">
-                <v-text-field
-                  label="Fecha"
-                  placeholder="Introduzca fecha"
-                  type="date"
-                  v-model="day"
-                  variant="outlined"
-                ></v-text-field>
-                <v-spacer></v-spacer>
-                <v-btn
-                  class="text"
-                  style="height: 58px"
-                  prepend-icon="mdi-magnify"
-                  @click.prevent="getDay"
-                  >buscar
-                </v-btn>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+      <v-col cols="12" class="mx-auto">
+        <v-card class="info">
+          <v-card-title> Búsqueda: </v-card-title>
+          <v-card-text>
+            <v-text-field
+              label="Fecha"
+              placeholder="Introduzca fecha"
+              type="date"
+              v-model="day"
+              density="compact"
+            >
+            </v-text-field>
+          </v-card-text>
+          <v-card-actions class="box">
+            <!-- ver listado de alumnos -->
+            <v-btn
+              variant="outlined"
+              v-if="list === false && dropsResult === false && picksResult === false"
+              @click=";(list = true), (noData = false)"
+              >ver listado de alumn@s
+            </v-btn>
+            <!-- cerrar listado de alumnos -->
+            <v-btn
+              variant="outlined"
+              v-if="
+                (list === true && dropsResult === false) || (list === true && picksResult === false)
+              "
+              @click="list = false"
+              >cerrar listado</v-btn
+            >
+            <!-- cerrar la respuesta y volver al listado de alumnos -->
+            <v-btn
+              variant="outlined"
+              v-if="dropsResult === true || picksResult === true"
+              @click="closeResult"
+              >Resetear</v-btn
+            >
+            <v-spacer></v-spacer>
+            <!-- filtrar por fecha seleccionada -->
+            <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayDrop"
+              >Llegadas
+            </v-btn>
+            <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayPick"
+              >Salidas
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+
         <!-- seleccion alumno y llegada o salida o ambos -->
         <v-card class="info mt-2" v-if="list === true">
           <v-card-text>
@@ -120,10 +104,11 @@
  -->
     <!-- resultados -->
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" class="mx-auto">
         <dropsInfo :drops="drops" v-if="dropsResult" />
-        <picksInfo :picks="picks" v-if="picksResult" />
-        <v-card v-else>
+        <picksInfo :picks="picks" :noData="noData" v-if="picksResult" />
+
+        <v-card v-if="noData">
           <v-card-text> No se han encontrado resultados. </v-card-text>
         </v-card>
       </v-col>
@@ -136,8 +121,8 @@
 import children from '../services/children'
 import inAndOut from '../services/inAndOut'
 import SearchByChild from './SearchByChild.vue'
-import dropsInfo from './dropsInfo.vue'
-import picksInfo from './picksInfo.vue'
+import dropsInfo from './DropsInfo.vue'
+import picksInfo from './PicksInfo.vue'
 
 export default {
   data() {
@@ -157,7 +142,10 @@ export default {
       // tutor: '',
       day: '',
       list: false,
-      dropOrPick: []
+      dropOrPick: [],
+      noData: false,
+      dayDrops: [],
+      dayPicks: []
     }
   },
   components: {
@@ -176,32 +164,34 @@ export default {
       this.dropOrPick = []
       this.dropsResult = false
       this.picksResult = false
-      this.list = true
+      this.list = false
     },
 
-    async getDay() {
+    getDayDrop() {
       const date = new Date(this.day).toLocaleDateString()
       this.dropsOff.filter((el) => {
         const day = new Date(el.date).toLocaleDateString()
         if (day === date) {
-          console.log(el)
+          this.drops.push(el)
         }
       })
+      this.list = false
+      this.dropsResult = true
+    },
+
+    getDayPick() {
+      const date = new Date(this.day).toLocaleDateString()
       this.picksUp.filter((el) => {
         const day = new Date(el.date).toLocaleDateString()
         if (day === date) {
-          console.log(el)
+          this.picks.push(el)
         }
       })
+      this.list = false
+      this.picksResult = true
     },
-    async searchChild(id) {
-      // this.students.filter((el) => {
-      //   if (
-      //     id === el._id
-      //   ) {
-      //     this.kid = el._id
-      //   }
-      // })
+
+    searchChild(id) {
       if (this.dropOrPick.includes('drop')) {
         this.dropsOff.filter((drop) => {
           if (id === drop.child._id) {
@@ -217,22 +207,9 @@ export default {
           }
         })
         this.picksResult = true
-      } else {
-        this.dropsOff.filter((drop) => {
-          if (id === drop.child._id) {
-            this.drops.push(drop)
-          }
-        })
-        this.dropsResult = true
-
-        this.picksUp.filter((pick) => {
-          if (id === pick.child._id) {
-            this.picks.push(pick)
-          }
-        })
-        this.picksResult = true
+      } else if (this.drops.length === 0 && this.picks.length === 0) {
+        this.noData = true
       }
-
       this.list = false
     }
   },
@@ -272,6 +249,4 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-
-
 </style>

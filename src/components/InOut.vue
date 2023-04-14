@@ -1,17 +1,18 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col cols="12" sm="10" class="mx-auto box">
+        <h2 style="color: white">Elige una opción:</h2>
+        <v-btn @click.prevent="goBack" class="text"  prepend-icon="mdi-chevron-left"> Atrás </v-btn>
+      </v-col>
+    </v-row>
     <!-- Seleccion consultas, llegada o salida -->
     <v-row>
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
           <v-card-actions>
-            <v-card-title> Seleccione una acción: </v-card-title>
-            <v-spacer></v-spacer>
-            <v-btn class="text" prepend-icon="mdi-magnify" :to="{ name: 'search' }">
+            <v-btn class="text" block prepend-icon="mdi-magnify" :to="{ name: 'search' }">
               Consultar
-            </v-btn>
-            <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left">
-              Atrás
             </v-btn>
           </v-card-actions>
 
