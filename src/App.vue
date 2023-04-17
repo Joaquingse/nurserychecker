@@ -2,9 +2,9 @@
   <v-app id="app">
     <v-main>
       <NavBar />
-      <RouterView />
+      <RouterView />    
+      <Footer />
     </v-main>
-    <Footer />
   </v-app>
 </template>
 

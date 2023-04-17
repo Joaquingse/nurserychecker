@@ -1,30 +1,44 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" class="mx-auto box">
+      <v-col cols="12" sm="10" class="mx-auto box">
         <h2 style="color: white">Consultas:</h2>
         <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Búsqueda por alumn@ y Búsqueda por fecha -->
     <v-row>
-      <v-col cols="12" class="mx-auto">
+      <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
           <v-card-title> Búsqueda: </v-card-title>
-          <v-card-text>
+
+          <v-card-text id="block">
             <v-text-field
               label="Fecha"
               placeholder="Introduzca fecha"
               type="date"
               v-model="day"
               density="compact"
+              class="mt-5"
             >
             </v-text-field>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <!-- filtrar por fecha seleccionada -->
+              <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayDrop"
+                >Llegadas
+              </v-btn>
+              <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayPick"
+                >Salidas
+              </v-btn>
+            </v-card-actions>
           </v-card-text>
-          <v-card-actions class="box">
+
+          <v-card-actions>
             <!-- ver listado de alumnos -->
             <v-btn
               variant="outlined"
+              block
               v-if="list === false && dropsResult === false && picksResult === false"
               @click=";(list = true), (noData = false)"
               >ver listado de alumn@s
@@ -36,6 +50,7 @@
                 (list === true && dropsResult === false) || (list === true && picksResult === false)
               "
               @click="list = false"
+              block
               >cerrar listado</v-btn
             >
             <!-- cerrar la respuesta y volver al listado de alumnos -->
@@ -43,26 +58,15 @@
               variant="outlined"
               v-if="dropsResult === true || picksResult === true"
               @click="closeResult"
+              block
               >Resetear</v-btn
             >
-            <v-spacer></v-spacer>
-            <!-- filtrar por fecha seleccionada -->
-            <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayDrop"
-              >Llegadas
-            </v-btn>
-            <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayPick"
-              >Salidas
-            </v-btn>
           </v-card-actions>
         </v-card>
 
         <!-- seleccion alumno y llegada o salida o ambos -->
         <v-card class="info mt-2" v-if="list === true">
           <v-card-text>
-            <v-row class="pl-1">
-              <v-checkbox v-model="dropOrPick" label="Llegadas" value="drop"> </v-checkbox>
-              <v-checkbox v-model="dropOrPick" label="Salidas" value="pick"> </v-checkbox>
-            </v-row>
             <v-text-field
               label="Alumn@"
               placeholder="Introduzca nombre"
@@ -70,6 +74,11 @@
               variant="solo"
             >
             </v-text-field>
+            <v-row class="pl-1">
+              <v-checkbox v-model="dropOrPick" label="Llegadas" value="drop"> </v-checkbox>
+              <v-checkbox v-model="dropOrPick" label="Salidas" value="pick"> </v-checkbox>
+            </v-row>
+
             <SearchByChild
               :search="search"
               :students="students"
@@ -248,5 +257,17 @@ export default {
 .box {
   display: flex;
   justify-content: space-between;
+}
+
+#block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 549px) {
+  #block {
+    display: block;
+  }
 }
 </style>
