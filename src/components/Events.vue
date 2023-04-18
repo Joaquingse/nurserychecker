@@ -24,7 +24,7 @@
           <v-card-text>
             <v-window v-model="tab">
               <v-window-item value="day" v-for="(event, idx) in today" :key="idx">
-                <v-card info>
+                <v-card class="info">
                   <v-card-title>
                     {{ event.title }}
                   </v-card-title>
@@ -34,7 +34,7 @@
               <v-window-item value="week"> Two </v-window-item>
 
               <v-window-item value="month" v-for="(event, idx) in month" :key="idx">
-                <v-card info>
+                <v-card class="info">
                   <v-card-title>
                     {{ event.title }}
                   </v-card-title>
