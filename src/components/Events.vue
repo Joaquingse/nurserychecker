@@ -1,44 +1,94 @@
 <template>
   <v-container>
-    <v-row v-if="!add">
-      <v-col cols="12" sm="10" class="mx-auto box border">
-        <v-row justify="end" align="center">
-          <h2 style="color: white">Eventos:</h2>
-          <v-spacer></v-spacer>
-          <v-btn @click.prevent="add = true" class="text" prepend-icon="mdi-plus" size="small"> Añadir </v-btn>
-          <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left" size="small">
-            Atrás
-          </v-btn>
-        </v-row>
+    <v-row v-if="!add" no-gutters style="height: 50px">
+      <v-col cols="12" sm="10" class="mx-auto box" align-self="center">
+        <h2 style="color: white">Eventos:</h2>
+        <v-spacer></v-spacer>
+        <v-btn
+          @click.prevent="add = true"
+          class="text"
+          prepend-icon="mdi-plus"
+          size="small"
+          v-if="store.role !== 'worker'"
+        >
+          Añadir
+        </v-btn>
+        <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left" size="small">
+          Atrás
+        </v-btn>
       </v-col>
     </v-row>
     <v-row v-if="!add">
-      <v-col cols="12" sm="10" class="mx-auto border">
+      <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
-          <v-tabs v-model="tab" class="tab" density="compact" grow>
-            <v-tab value="day"  color="#073b4c">Hoy</v-tab>
-            <v-tab value="week"  color="#073b4c">Semana</v-tab>
-            <v-tab value="month"  color="#073b4c">Mes</v-tab>
+          <v-tabs v-model="tab" class="tab" density="compact" grow paddless>
+            <v-tab value="day" color="#073b4c">Hoy</v-tab>
+            <!--  <v-tab value="week" color="#073b4c">Semana</v-tab> -->
+            <v-tab value="month" color="#073b4c">Mes</v-tab>
           </v-tabs>
 
           <v-card-text>
             <v-window v-model="tab">
               <v-window-item value="day" v-for="(event, idx) in today" :key="idx">
-                <v-card class="info">
-                  <v-card-title>
-                    {{ event.title }}
-                  </v-card-title>
-              </v-card>
-             </v-window-item>
+                <v-expansion-panels>
+                  <v-expansion-panel :title="event.title" class="info">
+                    <v-expansion-panel-text>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-card class="info" flat>
+                            <v-card-text>
+                              Fecha: {{ new Date(event.date).toLocaleDateString() }}
+                            </v-card-text>
+                            <v-card-text> Participantes: {{ event.attendance }} </v-card-text>
+                            <v-card-text> Descripción: {{ event.description }} </v-card-text>
+                          </v-card>
+                        </v-col>
+                      </v-row>
+                    </v-expansion-panel-text>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-window-item>
 
-              <v-window-item value="week"> Two </v-window-item>
+              <!--               <v-window-item value="week">
+                <v-expansion-panels>
+                  <v-expansion-panel :title="new Date(event.date).toLocaleDateString()" class="info">
+                    <v-expansion-panel-text>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-card class="info" flat>
+                            <v-card-text>
+                              Evento: {{ event.title }}
+                            </v-card-text>
+                            <v-card-text> Participantes: {{ event.attendance }} </v-card-text>
+                            <v-card-text> Descripción: {{ event.description }} </v-card-text>
+                          </v-card>
+                        </v-col>
+                      </v-row>
+                    </v-expansion-panel-text>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-window-item> -->
 
               <v-window-item value="month" v-for="(event, idx) in month" :key="idx">
-                <v-card class="info">
-                  <v-card-title>
-                    {{ event.title }}
-                  </v-card-title>
-              </v-card>  
+                <v-expansion-panels>
+                  <v-expansion-panel
+                    :title="new Date(event.date).toLocaleDateString()"
+                    class="info"
+                  >
+                    <v-expansion-panel-text>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-card class="info" flat>
+                            <v-card-text> Evento: {{ event.title }} </v-card-text>
+                            <v-card-text> Participantes: {{ event.attendance }} </v-card-text>
+                            <v-card-text> Descripción: {{ event.description }} </v-card-text>
+                          </v-card>
+                          <v-divider color="#ffffff"></v-divider>
+                        </v-col>
+                      </v-row>
+                    </v-expansion-panel-text>
+                  </v-expansion-panel>
+                </v-expansion-panels>
               </v-window-item>
             </v-window>
           </v-card-text>
@@ -46,12 +96,13 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <AddEvent :add="add" @close="close"/>
+      <AddEvent :add="add" @close="close" />
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { useAuthStore } from '../stores/store'
 import events from '../services/events'
 import AddEvent from './AddEvent.vue'
 
@@ -61,12 +112,13 @@ export default {
   },
   data() {
     return {
+      store: useAuthStore(),
       add: false,
       tab: null,
       events: [],
       today: [],
       week: [],
-      month: [],
+      month: []
     }
   },
 
@@ -75,40 +127,35 @@ export default {
       this.$router.go(-1)
     },
 
-    close(){
+    close() {
       this.add = false
-    },
-
+    }
   },
 
-  async created(){
+  async created() {
     const now = new Date()
     const day = new Date().getDate()
     const month = new Date().getMonth()
     const year = new Date().getFullYear()
 
-
     const response = await events.getEvents()
     this.events = response
     this.events.filter((el) => {
-        if(new Date(el.date).toLocaleDateString() === now.toLocaleDateString()){
-          this.today.push(el)
-        }
-        if(new Date(el.date).getMonth() === now.getMonth()){
-          this.month.push(el)
-        }
-
-
+      if (new Date(el.date).toLocaleDateString() === now.toLocaleDateString()) {
+        this.today.push(el)
+      }
+      if (
+        new Date(el.date).getMonth() === now.getMonth() &&
+        new Date(el.date).toLocaleDateString() >= now.toLocaleDateString()
+      ) {
+        this.month.push(el)
+      }
     })
-  console.log(this.month)
   }
 }
 </script>
 
 <style scoped>
-.border {
-  border: 1px solid black;
-}
 .info {
   color: #ffffff;
   background-color: #073b4c;
@@ -130,7 +177,6 @@ export default {
 
 .tab {
   color: #ffffff;
-  background-color: #118ab2;
+  background-color: #06d6a0;
 }
-
 </style>

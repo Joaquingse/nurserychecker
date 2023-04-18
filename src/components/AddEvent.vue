@@ -3,6 +3,7 @@
     <v-col cols="12" sm="10" class="mx-auto">
       <v-card class="info">
         <v-card-title>Nuevo Evento:</v-card-title>
+        <!-- formulario de entrada del nuevo evento -->
         <v-card-text>
           <v-text-field label="Título" placeholder="" v-model="title" variant="outlined">
           </v-text-field>
@@ -11,6 +12,7 @@
           <v-text-field
             label="Participantes"
             placeholder=""
+            type="number"
             v-model="attendance"
             variant="outlined"
           >
@@ -27,9 +29,42 @@
             size="small"
             >Aceptar</v-btn
           >
-          <v-btn @click.prevent="close" class="text" prepend-icon="mdi-chevron-left" size="small">
+          <v-btn
+            @click.prevent="closeAdd"
+            class="text"
+            prepend-icon="mdi-chevron-left"
+            size="small"
+          >
             Atrás
           </v-btn>
+          <!-- alerta por fecha incorrecta -->
+          <v-dialog v-model="alert1" width="300px">
+            <v-card>
+              <v-card-actions>
+                <v-card-text class="pa-5"> La fecha seleccionada no es correcta </v-card-text>
+                <v-btn
+                  icon="mdi-close-circle-outline"
+                  flat
+                  class="close"
+                  @click.prevent="alert1 = false"
+                ></v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <!-- alerta por usuario no autorizado -->
+          <v-dialog v-model="alert2" width="300px">
+            <v-card>
+              <v-card-actions>
+                <v-card-text class="pa-5"> Usuario no autrizado </v-card-text>
+                <v-btn
+                  icon="mdi-close-circle-outline"
+                  flat
+                  class="close"
+                  @click.prevent="alert1 = false"
+                ></v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -50,7 +85,9 @@ export default {
       title: '',
       date: '',
       attendance: '',
-      description: ''
+      description: '',
+      alert1: false,
+      alert2: false
     }
   },
 
@@ -63,18 +100,23 @@ export default {
     },
     async newEvent() {
       const store = useAuthStore()
+      const now = new Date()
       const info = {
         title: this.title,
         date: this.date,
         attendance: this.attendance,
         description: this.description
       }
-      const response = await events.addEvents(info)
-      if (store.role !== 'user') {
-        this.closeAdd()
-        return response
+      if (info.title === '' || info.date === '' || info.attendance === '') {
+        alert('Debe rellenar todos los campos')
+      } else if (store.role === 'worker') {
+        this.alert2 = true
+      } else if (new Date(this.date).toLocaleDateString() <= now.toLocaleDateString()) {
+        this.alert1 = true
       } else {
-        alert('Usuario no autorizado')
+        this.closeAdd()
+        const response = await events.addEvents(info)
+        return response
       }
     }
   }
@@ -93,5 +135,9 @@ export default {
 
 .text:hover {
   color: #ffffff;
+}
+
+.close {
+  color: #073b4c;
 }
 </style>
