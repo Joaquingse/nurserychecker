@@ -10,10 +10,11 @@
             class="text"
             v-if="role === 'admin' || role === 'owner'"
             prepend-icon="mdi-plus"
+            size="small"
           >
             Añadir
           </v-btn>
-          <v-btn @click.prevent="goBack" prepend-icon="mdi-chevron-left" class="text">
+          <v-btn @click.prevent="goBack" prepend-icon="mdi-chevron-left" class="text" size="small">
             Atrás
           </v-btn>
         </v-row>

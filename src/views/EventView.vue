@@ -1,18 +1,38 @@
 <template>
-  <div>
-    <Events />
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <allEvents/>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import Events from '../components/Events.vue';
+import allEvents from '../components/Events.vue'
 
-  export default {
-    components: { Events }
-    
+export default {
+  components: {
+    allEvents
   }
+}
 </script>
 
 <style scoped>
-
+.info {
+  color: #ffffff;
+  background-color: #073b4c;
+}
+.text {
+  color: #073b4c;
+  background-color: #06d6a0;
+}
+.text:hover {
+  color: #ffffff;
+  background-color: #06d6a0;
+}
+.box {
+  display: flex;
+  justify-content: space-between;
+}
 </style>

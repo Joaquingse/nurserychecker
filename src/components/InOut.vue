@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="10" class="mx-auto box">
         <h2 style="color: white">Elige una opción:</h2>
-        <v-btn @click.prevent="goBack" class="text"  prepend-icon="mdi-chevron-left"> Atrás </v-btn>
+        <v-btn @click.prevent="goBack" class="text"  prepend-icon="mdi-chevron-left" size="small"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Seleccion consultas, llegada o salida -->

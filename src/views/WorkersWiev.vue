@@ -1,15 +1,18 @@
 <template>
   <v-container>
-    <v-row justify="end" class="pr-3">
+    <v-row justify="end" class="pr-3 mt-1">
       <v-btn
         :to="{ name: 'adduser' }"
         class="text"
         v-if="role === 'admin' || role === 'owner'"
         prepend-icon="mdi-plus"
+        size="small"
       >
         Añadir
       </v-btn>
-      <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
+      <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left" size="small">
+        Atrás
+      </v-btn>
     </v-row>
     <v-row>
       <v-col cols="12" sm="6" md="4" v-for="(user, idx) in users" :key="idx">

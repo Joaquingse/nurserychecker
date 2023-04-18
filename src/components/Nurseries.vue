@@ -2,7 +2,7 @@
   <div>
     guarderias
     <v-row justify="end">
-      <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
+      <v-btn @click.prevent="goBack" id="text" prepend-icon="mdi-chevron-left" size="small"> Atrás </v-btn>
     </v-row>
   </div>
 </template>

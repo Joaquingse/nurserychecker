@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="10" class="mx-auto box">
         <h2 style="color: white">Consultas:</h2>
-        <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
+        <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left" size="small"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Búsqueda por alumn@ y Búsqueda por fecha -->
@@ -113,7 +113,7 @@
  -->
     <!-- resultados -->
     <v-row>
-      <v-col cols="12" class="mx-auto">
+      <v-col cols="12" sm="10" class="mx-auto">
         <dropsInfo :drops="drops" v-if="dropsResult" />
         <picksInfo :picks="picks" :noData="noData" v-if="picksResult" />
 
@@ -177,6 +177,7 @@ export default {
     },
 
     getDayDrop() {
+      this.drops = []
       const date = new Date(this.day).toLocaleDateString()
       this.dropsOff.filter((el) => {
         const day = new Date(el.date).toLocaleDateString()
@@ -189,6 +190,7 @@ export default {
     },
 
     getDayPick() {
+      this.picks = []
       const date = new Date(this.day).toLocaleDateString()
       this.picksUp.filter((el) => {
         const day = new Date(el.date).toLocaleDateString()
@@ -198,6 +200,7 @@ export default {
       })
       this.list = false
       this.picksResult = true
+      
     },
 
     searchChild(id) {
