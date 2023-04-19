@@ -107,11 +107,10 @@ export default {
         attendance: this.attendance,
         description: this.description
       }
-      if (info.title === '' || info.date === '' || info.attendance === '') {
-        alert('Debe rellenar todos los campos')
-      } else if (store.role === 'worker') {
+      if (store.role === 'worker') {
         this.alert2 = true
-      } else if (new Date(this.date).toLocaleDateString() <= now.toLocaleDateString()) {
+      } else if (new Date(this.date) <= now) {
+        console.log(new Date(this.date).toLocaleDateString() , now.toLocaleDateString())
         this.alert1 = true
       } else {
         this.closeAdd()

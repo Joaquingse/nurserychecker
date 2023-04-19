@@ -22,9 +22,9 @@
       <v-col cols="12" sm="10" class="mx-auto">
         <v-card class="info">
           <v-tabs v-model="tab" class="tab" density="compact" grow paddless>
-            <v-tab value="day" color="#073b4c">Hoy</v-tab>
-            <!--  <v-tab value="week" color="#073b4c">Semana</v-tab> -->
-            <v-tab value="month" color="#073b4c">Mes</v-tab>
+            <v-tab value="day" color="#ffffff"><strong>Hoy:</strong> </v-tab>
+            <!--  <v-tab value="week" color="#073b4c"><strong>Semana:</strong></v-tab> -->
+            <v-tab value="month" color="#ffffff"><strong>Siguientes:</strong> </v-tab>
           </v-tabs>
 
           <v-card-text>
@@ -41,6 +41,11 @@
                             </v-card-text>
                             <v-card-text> Participantes: {{ event.attendance }} </v-card-text>
                             <v-card-text> Descripción: {{ event.description }} </v-card-text>
+                            <!-- Future implementation: edit button -->
+                            <!-- <v-card-actions
+                              ><v-spacer></v-spacer>
+                              <v-btn class="text2" size="small">Editar</v-btn>
+                            </v-card-actions> -->
                           </v-card>
                         </v-col>
                       </v-row>
@@ -48,7 +53,7 @@
                   </v-expansion-panel>
                 </v-expansion-panels>
               </v-window-item>
-
+              <!-- In the future week events select -->
               <!--               <v-window-item value="week">
                 <v-expansion-panels>
                   <v-expansion-panel :title="new Date(event.date).toLocaleDateString()" class="info">
@@ -82,6 +87,11 @@
                             <v-card-text> Evento: {{ event.title }} </v-card-text>
                             <v-card-text> Participantes: {{ event.attendance }} </v-card-text>
                             <v-card-text> Descripción: {{ event.description }} </v-card-text>
+                            <!-- Future implementation: edit button -->
+                            <!-- <v-card-actions
+                              ><v-spacer></v-spacer>
+                              <v-btn class="text2" size="small">Editar</v-btn>
+                            </v-card-actions> -->
                           </v-card>
                           <v-divider color="#ffffff"></v-divider>
                         </v-col>
@@ -141,13 +151,10 @@ export default {
     const response = await events.getEvents()
     this.events = response
     this.events.filter((el) => {
-      if (new Date(el.date).toLocaleDateString() === now.toLocaleDateString()) {
+      if (new Date(el.date) === now) {
         this.today.push(el)
       }
-      if (
-        new Date(el.date).getMonth() === now.getMonth() &&
-        new Date(el.date).toLocaleDateString() >= now.toLocaleDateString()
-      ) {
+      if (new Date(el.date) >= now) {
         this.month.push(el)
       }
     })
@@ -166,6 +173,12 @@ export default {
   margin-left: 15px;
 }
 
+.text2 {
+  color: #073b4c;
+  background-color: #06d6a0;
+  margin-left: 15px;
+}
+
 .text:hover {
   color: #073b4c;
   background-color: #06d6a0;
@@ -176,7 +189,7 @@ export default {
 }
 
 .tab {
-  color: #ffffff;
+  color: #073b4c;
   background-color: #06d6a0;
 }
 </style>
