@@ -8,7 +8,7 @@
           </v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn prepend-icon="mdi-square-edit-outline" class="text" @click="tutorInf"
+            <v-btn prepend-icon="mdi-square-edit-outline" class="text" @click="tutorInf" size="small"
               >Editar Familia/Tutores
             </v-btn>
           </v-card-actions>

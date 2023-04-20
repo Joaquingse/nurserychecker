@@ -15,6 +15,7 @@
         class="text"
         v-if="role === 'admin'"
         prepend-icon="mdi-trash-can-outline"
+        size="small"
       >
         Eliminar
         <v-dialog v-model="dialog" activator="parent" width="auto">
@@ -26,13 +27,13 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer/>
-              <v-btn class="text"  @click="remove">Aceptar</v-btn>
-              <v-btn class="text"  @click="dialog = false">Cancelar</v-btn>
+              <v-btn class="text"  @click="remove" size="small">Aceptar</v-btn>
+              <v-btn class="text"  @click="dialog = false" size="small">Cancelar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-btn>
-      <v-btn class="text" v-if="role === 'admin'" prepend-icon="mdi-square-edit-outline">
+      <v-btn class="text" v-if="role === 'admin'" prepend-icon="mdi-square-edit-outline" size="small">
       Editar
       <v-dialog v-model="dialog2" activator="parent" width="auto">
           <v-card>
@@ -72,14 +73,14 @@
       ></v-text-field>
       <v-text-field
         label="Rol"
-        placeholder="Introduzca su nuevo e-mail"
+        placeholder="Introduzca su nuevo rol"
         hide-details="auto"
         v-model="info.role"
       ></v-text-field>
             <v-card-actions>
               <v-spacer/>
-              <v-btn class="text"  @click="edit">Aceptar</v-btn>
-              <v-btn class="text"  @click="dialog2 = false">Cancelar</v-btn>
+              <v-btn class="text"  @click="edit" size="small">Aceptar</v-btn>
+              <v-btn class="text"  @click="dialog2 = false" size="small">Cancelar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>       

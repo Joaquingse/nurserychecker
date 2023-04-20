@@ -25,10 +25,10 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <!-- filtrar por fecha seleccionada -->
-              <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayDrop"
+              <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayDrop" size="small"
                 >Llegadas
               </v-btn>
-              <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayPick"
+              <v-btn class="text" prepend-icon="mdi-magnify" @click.prevent="getDayPick" size="small"
                 >Salidas
               </v-btn>
             </v-card-actions>

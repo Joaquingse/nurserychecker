@@ -1,67 +1,82 @@
 <template>
-  <v-col cols="12" md="8" lg="6" class="mx-auto">
-    <v-card class="info" v-if="!edit">
-      <v-card-title>Datos de usuario </v-card-title>
-      <v-divider></v-divider>
-      <v-card-text> Nombre: {{ name.toLocaleUpperCase() }} </v-card-text>
-      <v-card-text> Apellido: {{ surname.toLocaleUpperCase() }} </v-card-text>
-      <v-card-text> DNI: {{ dni.toLocaleUpperCase() }} </v-card-text>
-      <v-card-text> Teléfono: {{ phone }} </v-card-text>
-      <v-card-text> E-mail: {{ email }} </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions class="button">
-        <v-spacer></v-spacer>
-        <v-btn class="text" @click.prevent="editInfo" prepend-icon="mdi-square-edit-outline">
-          Editar
-        </v-btn>
-        <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left"> Atrás </v-btn>
-      </v-card-actions>
-    </v-card>
-    <v-card class="info" v-else>
-      <v-card-title>Nuevos datos de usuario </v-card-title>
-      <v-divider></v-divider>
-      <v-text-field
-        label="Nombre"
-        placeholder="Introduzca su nuevo nombre"
-        hide-details="auto"
-        v-model="info.name"
-      ></v-text-field>
-      <v-text-field
-        label="Apellido"
-        placeholder="Introduzca su nuevo apellido"
-        hide-details="auto"
-        v-model="info.surname"
-      ></v-text-field>
-      <v-text-field
-        label="DNI"
-        placeholder="Introduzca su nuevo DNI"
-        hide-details="auto"
-        v-model="info.dni"
-      ></v-text-field>
-      <v-text-field
-        label="Teléfono"
-        placeholder="Introduzca su nuevo teléfono"
-        hide-details="auto"
-        v-model="info.phone"
-      ></v-text-field>
-      <v-text-field
-        label="E-mail"
-        placeholder="Introduzca su nuevo e-mail"
-        hide-details="auto"
-        v-model="info.email"
-      ></v-text-field>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn @click.prevent="updateInfo" prepend-icon="mdi-content-save-outline" class="text">
-          aceptar
-        </v-btn>
-        <v-btn @click.prevent="editInfo" prepend-icon="mdi-chevron-left" class="text">
-          Atrás
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-col>
+  <v-row>
+    <v-col cols="12" sm="10" class="mx-auto">
+      <v-card class="info" v-if="!edit && !password">
+        <v-card-title>Datos de usuario </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text> Nombre: {{ name.toLocaleUpperCase() }} </v-card-text>
+        <v-card-text> Apellido: {{ surname.toLocaleUpperCase() }} </v-card-text>
+        <v-card-text> DNI: {{ dni.toLocaleUpperCase() }} </v-card-text>
+        <v-card-text> Teléfono: {{ phone }} </v-card-text>
+        <v-card-text> E-mail: {{ email }} </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn @click.prevent="" prepend-icon="" class="button" size="small">
+            Cambiar password
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="text"
+            @click.prevent="editInfo"
+            prepend-icon="mdi-square-edit-outline"
+            size="small"
+          >
+            Editar
+          </v-btn>
+          <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left" size="small">
+            Atrás
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card class="info pa-2" v-if="edit && !password">
+        <v-card-title>Nuevos datos de usuario </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-text-field
+            label="Nombre"
+            placeholder=""
+            v-model="info.name"
+            variant="outlined"
+          ></v-text-field>
+          <v-text-field
+            label="Apellido"
+            placeholder=""
+            v-model="info.surname"
+            variant="outlined"
+          ></v-text-field>
+          <v-text-field
+            label="DNI"
+            placeholder=""
+            v-model="info.dni"
+            variant="outlined"
+          ></v-text-field>
+          <v-text-field
+            label="Teléfono"
+            placeholder=""
+            v-model="info.phone"
+            variant="outlined"
+          ></v-text-field>
+          <v-text-field
+            label="E-mail"
+            placeholder=""
+            v-model="info.email"
+            variant="outlined"
+          ></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click.prevent="updateInfo" prepend-icon="mdi-content-save-outline" class="text" size="small">
+            aceptar
+          </v-btn>
+          <v-btn @click.prevent="editInfo" prepend-icon="mdi-chevron-left" class="text" size="small">
+            Atrás
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card class="info" v-if="password"></v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -78,7 +93,8 @@ export default {
       email: '',
       id: '',
       info: {},
-      edit: false
+      edit: false,
+      password: false,
     }
   },
   async created() {
@@ -135,12 +151,18 @@ export default {
   background-color: #06d6a0;
 }
 
+.button {
+  color: #ffffff;
+  background-color: #ef476f;
+}
+
 .info {
   color: #ffffff;
   background-color: #073b4c;
 }
 
-.text:hover {
+.text:hover,
+.button:hover {
   color: #ffffff;
   background-color: #06d6a0;
 }

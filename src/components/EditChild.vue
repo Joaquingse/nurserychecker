@@ -47,10 +47,10 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <!-- Este boton solo guarda los cambios en la info del child -->
-          <v-btn @click.prevent="updateChild" prepend-icon="mdi-content-save-outline" class="text">
+          <v-btn @click.prevent="updateChild" prepend-icon="mdi-content-save-outline" class="text" size="small">
             aceptar
           </v-btn>
-          <v-btn @click.prevent="goBack" prepend-icon="mdi-chevron-left" class="text">
+          <v-btn @click.prevent="goBack" prepend-icon="mdi-chevron-left" class="text" size="small">
             Cancelar
           </v-btn>
         </v-card-actions>

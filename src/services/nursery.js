@@ -22,6 +22,21 @@ async function getNurseries() {
   }
 }
 
+async function updateNursery(id,info) {
+  const store = useAuthStore()
+  try {
+    const response = await API.put(`/nursery/${id}`, info, {
+      headers: {
+        token: store.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    return { error: error.message }
+  }
+}
+
 export default {
-  getNurseries
+  getNurseries,
+  updateNursery
 }

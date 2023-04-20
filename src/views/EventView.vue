@@ -1,11 +1,5 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
-        <allEvents/>
-      </v-col>
-    </v-row>
-  </v-container>
+  <allEvents />
 </template>
 
 <script>
