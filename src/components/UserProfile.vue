@@ -11,7 +11,7 @@
         <v-card-text> E-mail: {{ email }} </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn @click.prevent="" prepend-icon="" class="button" size="small">
+          <v-btn @click.prevent="password = true" prepend-icon="" class="button" size="small">
             Cambiar password
           </v-btn>
           <v-spacer></v-spacer>
@@ -66,15 +66,64 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click.prevent="updateInfo" prepend-icon="mdi-content-save-outline" class="text" size="small">
+          <v-btn
+            @click.prevent="updateInfo"
+            prepend-icon="mdi-content-save-outline"
+            class="text"
+            size="small"
+          >
             aceptar
           </v-btn>
-          <v-btn @click.prevent="editInfo" prepend-icon="mdi-chevron-left" class="text" size="small">
+          <v-btn
+            @click.prevent="editInfo"
+            prepend-icon="mdi-chevron-left"
+            class="text"
+            size="small"
+          >
             Atrás
           </v-btn>
         </v-card-actions>
       </v-card>
-      <v-card class="info" v-if="password"></v-card>
+      <v-card class="info" v-if="password">
+        <v-card-text>
+          <v-text-field
+            label="Password actual"
+            placeholder=""
+            :type="visible ? 'text' : 'password'"
+            v-model="currentPassword"
+            variant="outlined"
+            :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="visible = !visible"
+          ></v-text-field>
+          <v-text-field
+            label="Password nuevo"
+            placeholder=""
+            :type="visible1 ? 'text' : 'password'"
+            v-model="newPassword"
+            variant="outlined"
+            :append-icon="visible1 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="visible1 = !visible1"
+          ></v-text-field>
+          <v-text-field
+            label="Repite nuevo Password"
+            placeholder=""
+            :type="visible2 ? 'text' : 'password'"
+            v-model="newPassword2"
+            variant="outlined"
+            :append-icon="visible2 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="visible2 = !visible2"
+          ></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click.prevent="passUpdate" class="text" prepend-icon="" size="small">
+            Aceptar
+          </v-btn>
+          <v-btn @click.prevent="password = false" class="text" prepend-icon="mdi-chevron-left" size="small">
+            Atrás
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-col>
   </v-row>
 </template>
@@ -93,30 +142,17 @@ export default {
       email: '',
       id: '',
       info: {},
+      visible: false,
+      visible1: false,
+      visible2: false,
+      currentPassword: '',
+      newPassword: '',
+      newPassword2: '',
       edit: false,
-      password: false,
+      password: false
     }
   },
-  async created() {
-    const store = useAuthStore()
-    const response = await api.getUsers()
-    response.filter((el) => {
-      if (store.email === el.email) {
-        this.id = el._id
-      }
-    })
-    const userInfo = await api.getUserInfo(this.id)
-    this.name = userInfo.name
-    this.surname = userInfo.surname
-    this.dni = userInfo.dni
-    this.email = userInfo.email
-    this.phone = userInfo.phone
-    this.info.name = userInfo.name
-    this.info.surname = userInfo.surname
-    this.info.dni = userInfo.dni
-    this.info.email = userInfo.email
-    this.info.phone = userInfo.phone
-  },
+
   methods: {
     goBack() {
       this.$router.go(-1)
@@ -140,7 +176,41 @@ export default {
         this.phone = this.info.phone
         this.edit = !this.edit
       }
+    },
+
+    async passUpdate() {
+      if (this.newPassword !== this.newPassword2) {
+        return alert('El nuevo password introducido no coincide')
+      } else {
+        const pass = {
+          currentP: this.currentPassword,
+          newP: this.newPassword
+        }
+        const response = await api.updatePassword(this.id, pass)
+        return response
+      }
     }
+  },
+
+  async created() {
+    const store = useAuthStore()
+    const response = await api.getUsers()
+    response.filter((el) => {
+      if (store.email === el.email) {
+        this.id = el._id
+      }
+    })
+    const userInfo = await api.getUserInfo(this.id)
+    this.name = userInfo.name
+    this.surname = userInfo.surname
+    this.dni = userInfo.dni
+    this.email = userInfo.email
+    this.phone = userInfo.phone
+    this.info.name = userInfo.name
+    this.info.surname = userInfo.surname
+    this.info.dni = userInfo.dni
+    this.info.email = userInfo.email
+    this.info.phone = userInfo.phone
   }
 }
 </script>

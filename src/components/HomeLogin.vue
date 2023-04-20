@@ -1,39 +1,42 @@
 <template>
-  <v-container class="">
-    <v-row id="row">
-      <v-col cols="12" md="8" class="mx-auto" id="a">
-        <v-img
-          src="https://res.cloudinary.com/burgerproject/image/upload/v1678192287/My%20images/logo_wh8syi.png"
-          alt="logo"
-          class="mx-auto"
-        ></v-img>
-      </v-col>
+  <v-container class="" justify="center">
+    <v-row>
+      <v-col cols="12" class="mx-auto" id="row">
+        <div id="a">
+          <v-img
+            src="https://res.cloudinary.com/burgerproject/image/upload/v1678192287/My%20images/logo_wh8syi.png"
+            alt="logo"
+            class="mx-auto"
+          ></v-img>
+        </div>
 
-      <v-col cols="12" sm="10" md="8" class="mx-auto" id="b">
-        <h3 id="text">Login</h3>
-        <v-text-field
-          label="Email"
-          placeholder="Email"
-          v-model="email"
-          filled
-          class="ma-4"
-        ></v-text-field>
-        <v-text-field
-          label="Password"
-          :type="visible ? 'text' : 'password'"
-          placeholder="Password"
-          v-model="password"
-          filled
-          class="ma-4"
-          :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="visible = !visible"
-        ></v-text-field>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn @click.prevent="loginUser" @keydown.enter="loginUser" class="button">
-            aceptar
-          </v-btn>
-        </v-card-actions>
+        <v-card id="b" color="rgba(255,209,102,0)" flat>
+          <v-card-title id="text">Login</v-card-title>
+          <v-card-text>
+            <v-text-field
+              label="Email"
+              placeholder="Email"
+              v-model="email"
+              variant="outlined"
+            ></v-text-field>
+            <v-text-field
+              label="Password"
+              :type="visible ? 'text' : 'password'"
+              placeholder="Password"
+              v-model="password"
+              variant="outlined"
+              :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="visible = !visible"
+            ></v-text-field>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer />
+            <v-btn @click.prevent="loginUser" @keydown.enter="loginUser" class="button">
+              aceptar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -92,6 +95,7 @@ export default {
 
 #text {
   color: #ffd166;
+  font-weight: 600;
   padding: 14px;
 }
 
@@ -102,16 +106,14 @@ export default {
   }
 
   #a {
-    display: block;
     grid-area: a;
-    width: 50vw;
-    margin: 14% auto;
+    width: 40vw;
+    align-self: center;
   }
   #b {
-    display: block;
     grid-area: b;
-    width: 50vw;
-    margin:10% auto;
+    width: 40vw;
+    padding-top: 50px;
   }
 }
 </style>

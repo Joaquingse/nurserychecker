@@ -76,6 +76,24 @@ async function updateUserInfo(id, info) {
   }
 }
 
+async function updatePassword(id, info) {
+  const store = useAuthStore()
+  try {
+    const response = await API.post(
+      `/user/${id}`,
+      info,
+      {
+        headers: {
+          token: store.token
+        }
+      }
+    )
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
+
 async function remUser(id){
   const store = useAuthStore()
   try {
@@ -100,5 +118,6 @@ export default {
   getUsers,
   getUserInfo,
   updateUserInfo,
+  updatePassword,
   remUser
 }
