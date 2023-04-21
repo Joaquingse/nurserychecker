@@ -1,16 +1,14 @@
 <template>
-  <v-container class="" justify="center">
-    <v-row>
-      <v-col cols="12" class="mx-auto" id="row">
-        <div id="a">
-          <v-img
-            src="https://res.cloudinary.com/burgerproject/image/upload/v1678192287/My%20images/logo_wh8syi.png"
-            alt="logo"
-            class="mx-auto"
-          ></v-img>
-        </div>
-
-        <v-card id="b" color="rgba(255,209,102,0)" flat>
+  <v-container>
+    <v-row class="roww" align-sm="center">
+      <v-col cols="12" sm="8" md="6" class="mx-auto">
+        <v-img
+          src="https://res.cloudinary.com/burgerproject/image/upload/v1678192287/My%20images/logo_wh8syi.png"
+          alt="logo"
+        ></v-img>
+      </v-col>
+        <v-col cols="12" sm="8" md="6" class="mx-auto">
+        <v-card color="rgba(0,0,0,0)" flat >
           <v-card-title id="text">Login</v-card-title>
           <v-card-text>
             <v-text-field
@@ -29,7 +27,6 @@
               @click:append="visible = !visible"
             ></v-text-field>
           </v-card-text>
-
           <v-card-actions>
             <v-spacer />
             <v-btn @click.prevent="loginUser" @keydown.enter="loginUser" class="button">
@@ -96,24 +93,26 @@ export default {
 #text {
   color: #ffd166;
   font-weight: 600;
-  padding: 14px;
 }
-
+.roww {
+  height: 75vh;
+}
 @media (min-width: 720px) {
-  #row {
+
+/*   #row {
     display: grid;
     grid-template-areas: 'a b';
   }
 
   #a {
     grid-area: a;
-    width: 40vw;
+    width: 30vw;
     align-self: center;
   }
   #b {
     grid-area: b;
-    width: 40vw;
+    width: 30vw;
     padding-top: 50px;
-  }
+  } */
 }
 </style>

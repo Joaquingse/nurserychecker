@@ -1,6 +1,6 @@
 <template>
   
-  <HomeLogin class="pt-15 ml-2"/>
+  <HomeLogin/>
 
 </template>
 
