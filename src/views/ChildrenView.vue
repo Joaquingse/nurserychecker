@@ -61,6 +61,11 @@ export default {
     response.forEach((el) => {
       this.childrenList.push(el)
     })
+    this.childrenList.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1
+      }
+    })
   }
 }
 </script>

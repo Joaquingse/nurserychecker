@@ -24,7 +24,8 @@ export default {
         el.name.toUpperCase().includes(this.search.toUpperCase())
       )
     }
-  }
+  },
+
 }
 </script>
 

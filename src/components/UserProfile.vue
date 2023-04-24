@@ -1,14 +1,15 @@
 <template>
   <v-row>
     <v-col cols="12" sm="10" class="mx-auto">
+      <!-- user data -->
       <v-card class="info" v-if="!edit && !password">
         <v-card-title>Datos de usuario </v-card-title>
         <v-divider></v-divider>
-        <v-card-text> Nombre: {{ name.toLocaleUpperCase() }} </v-card-text>
-        <v-card-text> Apellido: {{ surname.toLocaleUpperCase() }} </v-card-text>
-        <v-card-text> DNI: {{ dni.toLocaleUpperCase() }} </v-card-text>
-        <v-card-text> Teléfono: {{ phone }} </v-card-text>
-        <v-card-text> E-mail: {{ email }} </v-card-text>
+        <v-card-text> Nombre: {{ user.name }} </v-card-text>
+        <v-card-text> Apellido: {{ user.surname }} </v-card-text>
+        <v-card-text> DNI: {{ user.dni }} </v-card-text>
+        <v-card-text> Teléfono: {{ user.phone }} </v-card-text>
+        <v-card-text> E-mail: {{ user.email }} </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn @click.prevent="password = true" prepend-icon="" class="button" size="small">
@@ -28,6 +29,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      <!-- edit user -->
       <v-card class="info pa-2" v-if="edit && !password">
         <v-card-title>Nuevos datos de usuario </v-card-title>
         <v-divider></v-divider>
@@ -84,6 +86,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      <!-- password change -->
       <v-card class="info" v-if="password">
         <v-card-text>
           <v-text-field
@@ -133,14 +136,11 @@ import api from '../services/api'
 import { useAuthStore } from '../stores/store'
 
 export default {
+  props: {
+    user: Object,
+  },
   data() {
     return {
-      name: '',
-      surname: '',
-      dni: '',
-      phone: '',
-      email: '',
-      id: '',
       info: {},
       visible: false,
       visible1: false,
@@ -158,6 +158,7 @@ export default {
       this.$router.go(-1)
     },
     editInfo() {
+      this.info = this.user
       this.edit = !this.edit
     },
     async updateInfo() {
@@ -169,11 +170,11 @@ export default {
       if (response === 'error') {
         Alert('No se pudo actualizar')
       } else {
-        this.name = this.info.name.toLocaleUpperCase()
-        this.surname = this.info.surname.toLocaleUpperCase()
-        this.dni = this.info.dni.toLocaleUpperCase()
-        this.email = this.info.email
-        this.phone = this.info.phone
+        this.user.name = this.info.name.toLocaleUpperCase()
+        this.user.surname = this.info.surname.toLocaleUpperCase()
+        this.user.dni = this.info.dni.toLocaleUpperCase()
+        this.user.email = this.info.email
+        this.user.phone = this.info.phone
         this.edit = !this.edit
       }
     },
@@ -192,25 +193,8 @@ export default {
     }
   },
 
-  async created() {
-    const store = useAuthStore()
-    const response = await api.getUsers()
-    response.filter((el) => {
-      if (store.email === el.email) {
-        this.id = el._id
-      }
-    })
-    const userInfo = await api.getUserInfo(this.id)
-    this.name = userInfo.name
-    this.surname = userInfo.surname
-    this.dni = userInfo.dni
-    this.email = userInfo.email
-    this.phone = userInfo.phone
-    this.info.name = userInfo.name
-    this.info.surname = userInfo.surname
-    this.info.dni = userInfo.dni
-    this.info.email = userInfo.email
-    this.info.phone = userInfo.phone
+  beforeCreate () {
+    this.info = this.user
   }
 }
 </script>

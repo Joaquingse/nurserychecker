@@ -74,6 +74,7 @@
                 </v-expansion-panels>
               </v-window-item> -->
 
+              <!-- Called "next in tabs, to show all the next events, not only the month events" -->
               <v-window-item value="month" v-for="(event, idx) in month" :key="idx">
                 <v-expansion-panels>
                   <v-expansion-panel
@@ -106,7 +107,7 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <AddEvent :add="add" @close="close" />
+      <AddEvent :add="add" @close="close" @new="newEvent"/>
     </v-row>
   </v-container>
 </template>
@@ -139,7 +140,18 @@ export default {
 
     close() {
       this.add = false
-    }
+    },
+    async newEvent(info) {
+      const response = await events.addEvents(info)
+      this.month.push(info)
+      this.month.sort((a,b) =>{
+        if(a.date < b.date) {
+          return -1
+        }
+      })
+      this.close()
+      return response
+    },
   },
 
   async created() {
@@ -156,6 +168,11 @@ export default {
       }
       if (new Date(el.date) >= now) {
         this.month.push(el)
+        this.month.sort((a,b) =>{
+        if(a.date < b.date) {
+          return -1
+        }
+      })
       }
     })
   }

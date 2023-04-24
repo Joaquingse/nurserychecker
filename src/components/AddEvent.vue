@@ -23,7 +23,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            @click.prevent="newEvent"
+            @click.prevent="validation"
             class="text"
             prepend-icon="mdi-content-save-outline"
             size="small"
@@ -65,6 +65,32 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+          <v-dialog v-model="alert3" width="300px">
+            <v-card>
+              <v-card-actions>
+                <v-card-text class="pa-5"> El nombre del evento es obligatorio </v-card-text>
+                <v-btn
+                  icon="mdi-close-circle-outline"
+                  flat
+                  class="close"
+                  @click.prevent="alert3 = false"
+                ></v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog v-model="alert4" width="300px">
+            <v-card>
+              <v-card-actions>
+                <v-card-text class="pa-5"> Debe indicar el número de participantes </v-card-text>
+                <v-btn
+                  icon="mdi-close-circle-outline"
+                  flat
+                  class="close"
+                  @click.prevent="alert4 = false"
+                ></v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -87,7 +113,9 @@ export default {
       attendance: '',
       description: '',
       alert1: false,
-      alert2: false
+      alert2: false,
+      alert3: false,
+      alert4: false
     }
   },
 
@@ -98,7 +126,7 @@ export default {
     closeAdd() {
       this.$emit('close')
     },
-    async newEvent() {
+    validation() {
       const store = useAuthStore()
       const now = new Date()
       const info = {
@@ -107,15 +135,19 @@ export default {
         attendance: this.attendance,
         description: this.description
       }
-      if (store.role === 'worker') {
+
+      if (!this.title) {
+        this.alert3 = true
+      } else if (!this.date) {
+        this.alert1 = true
+      } else if (!this.attendance) {
+        this.alert4 = true
+      } else if (store.role === 'worker') {
         this.alert2 = true
       } else if (new Date(this.date) <= now) {
-        console.log(new Date(this.date).toLocaleDateString() , now.toLocaleDateString())
         this.alert1 = true
       } else {
-        this.closeAdd()
-        const response = await events.addEvents(info)
-        return response
+        this.$emit('new', info)
       }
     }
   }

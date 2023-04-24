@@ -80,8 +80,13 @@ export default {
     response.filter((el) => {
       if (el.role !== 'admin') this.users.push(el)
     })
-    //this.users = response
+    this.users.sort((a,b) =>{
+      if (a.name < b.name) {
+        return -1
+      }
+    })
     this.role = store.role
+  
   }
 }
 </script>
