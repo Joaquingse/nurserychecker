@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row v-if="!add" no-gutters style="height: 50px">
-      <v-col cols="12" sm="10" class="mx-auto box" align-self="center">
+      <v-col cols="12" class="mx-auto box" align-self="center">
         <h2 style="color: white">Eventos:</h2>
         <v-spacer></v-spacer>
         <v-btn
@@ -19,7 +19,7 @@
       </v-col>
     </v-row>
     <v-row v-if="!add">
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" class="mx-auto">
         <v-card class="info">
           <v-tabs v-model="tab" class="tab" density="compact" grow paddless>
             <v-tab value="day" color="#ffffff"><strong>Hoy:</strong> </v-tab>

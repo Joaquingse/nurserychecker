@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col>
+    <v-col >
       <v-card>
         <v-list class="info">
           <v-list-group>
@@ -72,7 +72,7 @@
               class="text"
               append-icon="mdi-square-edit-outline"
               size="small"
-              :to="{ name: 'editchild', params: { id: this.child._id } }"
+              :to="{ name: 'editchild', params: { id: child._id.toLocaleString() } }"
               v-if="role !== 'worker'"
               >editar</v-btn
             >

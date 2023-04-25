@@ -1,5 +1,9 @@
 <template>
-  <allEvents />
+  <v-row>
+    <v-col cols="12" sm="10" md="8" class="mx-auto">
+        <allEvents />
+    </v-col>
+  </v-row>
 </template>
 
 <script>

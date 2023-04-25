@@ -1,14 +1,14 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto box">
+      <v-col cols="12" sm="10" md="8" class="mx-auto box">
         <h2 style="color: white">Elige una opción:</h2>
         <v-btn @click.prevent="goBack" class="text"  prepend-icon="mdi-chevron-left" size="small"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Seleccion consultas, llegada o salida -->
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
           <v-card-actions>
             <v-btn class="text" block prepend-icon="mdi-magnify" :to="{ name: 'search' }">
@@ -31,7 +31,7 @@
     </v-row>
     <!-- registro llegada -->
     <v-row v-if="getIn === true">
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
           <v-card-title class="box">
             Llegada:
@@ -68,7 +68,7 @@
     </v-row>
     <!-- registro Salida -->
     <v-row v-if="getOut === true">
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
           <v-card-title class="box"> Salida: 
             <v-btn
@@ -104,7 +104,7 @@
     </v-row>
     <!-- Datos y registro llegada -->
     <v-row v-if="selectIn === true">
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
           <v-card-title class="box">
             {{ tutor.name + ' ' + tutor.surname }}
@@ -138,7 +138,7 @@
     </v-row>
     <!-- Datos y registro salida -->
     <v-row v-if="selectOut === true">
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
           <v-card-title class="box">
             {{ tutor.name + ' ' + tutor.surname }}             

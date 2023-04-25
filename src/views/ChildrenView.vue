@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="mt-2">
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-row class="pr-3 ml-1" justify="end">
           <h2 class="info">Listado de alumnos</h2>
           <v-spacer></v-spacer>
@@ -21,7 +21,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <!-- Elemento para fitrado por nombre -->
         <v-text-field variant="solo" v-model="search" label="Búsqueda"></v-text-field>
         <!-- Componente que nos trae la lista de alumnos, en el que aplicamos el filtro -->

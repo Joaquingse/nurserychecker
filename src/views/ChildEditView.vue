@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row v-if="tutorInfo === false">
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
           <v-card-title>
             {{ child.name + ' ' + child.surname }}
@@ -17,7 +17,7 @@
     </v-row>
 
     <v-row>
-      <v-col cols="12" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <EditChild :child="child" v-if="tutorInfo === false" />
         <Tutors
           :child="child"
@@ -89,7 +89,7 @@ export default {
       this.child.tutors = response.tutors
     }
   },
-  async created() {
+  async beforeMount () {
     if (this.store.role !== 'worker') {
       const response = await children.getChild(this.id)
       this.child = response
