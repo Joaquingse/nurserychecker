@@ -21,6 +21,7 @@
                         hide-details="auto"
                         v-model="dni"
                         variant="outlined"
+                        @keydown.enter.prevent="findDni"
                       ></v-text-field>
                     </v-card-text>
                     <v-card-actions>
