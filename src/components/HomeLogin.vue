@@ -7,7 +7,7 @@
           alt="logo"
         ></v-img>
       </v-col>
-        <v-col cols="12" sm="8" md="6" class="mx-auto">
+      <v-col cols="12" sm="8" md="4" class="mx-auto">
         <v-card color="rgba(0,0,0,0)" flat >
           <v-card-title id="text">Login</v-card-title>
           <v-card-text>
