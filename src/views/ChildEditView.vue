@@ -8,7 +8,11 @@
           </v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn prepend-icon="mdi-square-edit-outline" class="text" @click="tutorInf" size="small"
+            <v-btn
+              prepend-icon="mdi-square-edit-outline"
+              class="text"
+              @click="tutorInf"
+              size="small"
               >Editar Familia/Tutores
             </v-btn>
           </v-card-actions>
@@ -85,16 +89,14 @@ export default {
 
     async addTutor(id, tutorId) {
       this.child.tutors.push(tutorId)
-      const response = await children.updateChild(id,{ tutors:this.child.tutors })
+      const response = await children.updateChild(id, { tutors: this.child.tutors })
       this.child.tutors = response.tutors
     }
   },
-  async beforeMount () {
-    if (this.store.role !== 'worker') {
-      const response = await children.getChild(this.id)
-      this.child = response
-      this.tutors = this.child.tutors
-    }
+  async beforeMount() {
+    const response = await children.getChild(this.id)   
+    this.child = response
+    this.tutors = this.child.tutors
   }
 }
 </script>
