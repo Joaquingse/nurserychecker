@@ -72,7 +72,7 @@
               class="text"
               append-icon="mdi-square-edit-outline"
               size="small"
-              :to="{ name: 'editchild', params: { id: child._id.toLocaleString() } }"
+              :to="{ name: 'editchild', params: { child } }"
               v-if="role !== 'worker'"
               >editar</v-btn
             >
