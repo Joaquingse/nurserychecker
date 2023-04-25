@@ -25,11 +25,12 @@
               variant="outlined"
               :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="visible = !visible"
+              @keydown.enter="loginUser"
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn @click.prevent="loginUser" @keydown.enter="loginUser" class="button">
+            <v-btn @click.prevent="loginUser"  class="button">
               aceptar
             </v-btn>
           </v-card-actions>

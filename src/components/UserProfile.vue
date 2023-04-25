@@ -97,6 +97,7 @@
             variant="outlined"
             :append-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="visible = !visible"
+            @keydown.enter.prevent="passUpdate"
           ></v-text-field>
           <v-text-field
             label="Password nuevo"
@@ -106,6 +107,7 @@
             variant="outlined"
             :append-icon="visible1 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="visible1 = !visible1"
+            @keydown.enter.prevent="passUpdate"
           ></v-text-field>
           <v-text-field
             label="Repite nuevo Password"
@@ -115,6 +117,7 @@
             variant="outlined"
             :append-icon="visible2 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="visible2 = !visible2"
+            @keydown.enter.prevent="passUpdate"
           ></v-text-field>
         </v-card-text>
         <v-card-actions>

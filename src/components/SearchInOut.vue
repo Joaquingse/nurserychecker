@@ -1,14 +1,14 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto box">
+      <v-col cols="12" sm="10" md="8" class="mx-auto box">
         <h2 style="color: white">Consultas:</h2>
         <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left" size="small"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Búsqueda por alumn@ y Búsqueda por fecha -->
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-card class="info">
           <v-card-title> Búsqueda: </v-card-title>
 
