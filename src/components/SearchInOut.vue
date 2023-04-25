@@ -186,6 +186,7 @@ export default {
         }
       })
       this.list = false
+      this.picksResult = false
       this.dropsResult = true
     },
 
@@ -199,6 +200,7 @@ export default {
         }
       })
       this.list = false
+      this.dropsResult = false
       this.picksResult = true
       
     },
