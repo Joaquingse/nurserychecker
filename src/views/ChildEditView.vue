@@ -93,11 +93,8 @@ export default {
       this.child.tutors = response.tutors
     }
   },
-  async beforeMount() {
-
-
+  async beforeCreate() {
     const response = await children.getChild(this.id)   
-
     this.child = response
     this.tutors = this.child.tutors
   }
