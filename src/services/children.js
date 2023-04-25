@@ -3,7 +3,7 @@ import { getTransitionRawChildren } from 'vue'
 import { useAuthStore } from '../stores/store'
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://nursery-checker.onrender.com/api',
   headers: {
     token: localStorage.getItem('token')
   }
