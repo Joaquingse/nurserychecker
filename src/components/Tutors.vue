@@ -8,96 +8,95 @@
           </v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn-group density="compact">
-              <v-btn @click="" prepend-icon="mdi-plus" class="text" size="small">
-                Añadir Familiar/Tutor
-                <!-- Para añadir un elemento buscamos por el DNI -->
-                <v-dialog v-model="dialog" activator="parent" width="350px">
-                  <v-card v-if="dniYes === false && dniNo === false">
-                    <v-card-title> Añadir Familiar/Tutor </v-card-title>
-                    <v-card-text>
-                      <v-text-field
-                        label="Introduce un DNI"
-                        hide-details="auto"
-                        v-model="dni"
-                        variant="outlined"
-                        @keydown.enter.prevent="findDni"
-                      ></v-text-field>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn class="text" @click="findDni">Comprobar DNI</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                  <!-- Si el DNI no existe, pedimos datos y añadimos el nuevo elemento
-                  a la DB y al niñ@ -->
-                  <v-card v-if="dniNo === true && dniYes === false">
-                    <v-card-title> Añadir nuevo: </v-card-title>
-                    <v-card-text>
-                      <v-text-field
-                        label="Nombre"
-                        hide-details="auto"
-                        v-model="info.name"
-                      ></v-text-field>
-                      <v-text-field
-                        label="Apellidos"
-                        hide-details="auto"
-                        v-model="info.surname"
-                      ></v-text-field>
-                      <v-text-field
-                        label="Dni"
-                        hide-details="auto"
-                        v-model="info.dni"
-                      ></v-text-field>
-                      <v-text-field
-                        label="Teléfono"
-                        hide-details="auto"
-                        v-model="info.phone"
-                      ></v-text-field>
-                      <v-text-field
-                        label="E-mail"
-                        hide-details="auto"
-                        v-model="info.email"
-                      ></v-text-field>
-                      <v-row class="pa-2">
-                        <v-checkbox v-model="info.relation" label="Padre/Madre" value="parents">
-                        </v-checkbox>
-                        <v-checkbox v-model="info.relation" label="Familia" value="family">
-                        </v-checkbox>
-                        <v-checkbox v-model="info.relation" label="Tutor/a legal" value="others">
-                        </v-checkbox>
-                      </v-row>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        class="text"
-                        prepend-icon="mdi-content-save-outline"
-                        @click="addTutorChild"
-                        >Aceptar</v-btn
-                      >
-                    </v-card-actions>
-                  </v-card>
-                  <!-- Si existe el elemento en la DB, se lo añadimos al niñ@ -->
-                  <v-card v-if="dniYes === true">
-                    <v-card-title> </v-card-title>
-                    <v-card-text>
-                      El Familiar/Tutor ya existe, desea añadir a la lista?
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn class="text" prepend-icon="mdi-content-save-outline" @click="addTutor"
-                        >Aceptar</v-btn
-                      >
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-btn>
 
-              <v-btn @click="tutorInf" prepend-icon="mdi-chevron-left" class="text" size="small">
-                Volver a datos del/la alumn@
+            <v-btn @click="" prepend-icon="mdi-plus" class="text" size="small">
+              Familiar/Tutor
+              <!-- Para añadir un elemento buscamos por el DNI -->
+              <v-dialog v-model="dialog" activator="parent" width="350px">
+                <v-card v-if="dniYes === false && dniNo === false">
+                  <v-card-title> Añadir Familiar/Tutor </v-card-title>
+                  <v-card-text>
+                    <v-text-field
+                      label="Introduce un DNI"
+                      hide-details="auto"
+                      v-model="dni"
+                      variant="outlined"
+                      @keydown.enter.prevent="findDni"
+                    ></v-text-field>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn class="text" @click="findDni">Comprobar DNI</v-btn>
+                  </v-card-actions>
+                </v-card>
+                <!-- Si el DNI no existe, pedimos datos y añadimos el nuevo elemento
+                  a la DB y al niñ@ -->
+                <v-card v-if="dniNo === true && dniYes === false">
+                  <v-card-title> Añadir nuevo: </v-card-title>
+                  <v-card-text>
+                    <v-text-field
+                      label="Nombre"
+                      hide-details="auto"
+                      v-model="info.name"
+                    ></v-text-field>
+                    <v-text-field
+                      label="Apellidos"
+                      hide-details="auto"
+                      v-model="info.surname"
+                    ></v-text-field>
+                    <v-text-field label="Dni" hide-details="auto" v-model="info.dni"></v-text-field>
+                    <v-text-field
+                      label="Teléfono"
+                      hide-details="auto"
+                      v-model="info.phone"
+                    ></v-text-field>
+                    <v-text-field
+                      label="E-mail"
+                      hide-details="auto"
+                      v-model="info.email"
+                    ></v-text-field>
+                    <v-row class="pa-2">
+                      <v-checkbox v-model="info.relation" label="Padre/Madre" value="parents">
+                      </v-checkbox>
+                      <v-checkbox v-model="info.relation" label="Familia" value="family">
+                      </v-checkbox>
+                      <v-checkbox v-model="info.relation" label="Tutor/a legal" value="others">
+                      </v-checkbox>
+                    </v-row>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      class="text"
+                      prepend-icon="mdi-content-save-outline"
+                      @click="addTutorChild"
+                      >Aceptar</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
+                <!-- Si existe el elemento en la DB, se lo añadimos al niñ@ -->
+                <v-card v-if="dniYes === true">
+                  <v-card-title> </v-card-title>
+                  <v-card-text> El Familiar/Tutor ya existe, desea añadir a la lista? </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn class="text" prepend-icon="mdi-content-save-outline" @click="addTutor"
+                      >Aceptar</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-btn>
+            
+              <v-btn
+                @click="tutorInf"
+                prepend-icon="mdi-chevron-left"
+                class="text"
+                size="small"
+              >
+                Volver
               </v-btn>
-            </v-btn-group>
+   
           </v-card-actions>
         </v-card>
       </v-col>
@@ -251,4 +250,6 @@ export default {
   color: #ffffff;
   background-color: #06d6a0;
 }
+
+
 </style>

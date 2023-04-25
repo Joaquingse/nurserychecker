@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col >
+    <v-col>
       <v-card>
         <v-list class="info">
           <v-list-group>
@@ -64,27 +64,32 @@
               ></v-list-item>
             </v-list-group>
           </v-list-group>
-
         </v-list>
         <v-card-actions class="pr-2" v-if="role !== 'worker'">
-            <v-spacer></v-spacer>
-            <v-btn
-              class="text"
-              append-icon="mdi-square-edit-outline"
-              size="small"
-              :to="{ name: 'editchild', params: { id: child._id.toLocaleString() } }"
-              v-if="role !== 'worker'"
-              >editar</v-btn
-            >
-            <v-btn class="text" append-icon="mdi-trash-can-outline" size="small" v-if="role === 'admin' || role === 'owner'">eliminar</v-btn>
-          </v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="text"
+            append-icon="mdi-square-edit-outline"
+            size="small"
+            :to="{ name: 'editchild', params: { id: child._id.toLocaleString() } }"
+            v-if="role !== 'worker'"
+            >editar</v-btn
+          >
+          <v-btn
+            class="text"
+            append-icon="mdi-trash-can-outline"
+            size="small"
+            v-if="role === 'admin' || role === 'owner'"
+            >eliminar</v-btn
+          >
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import { useAuthStore } from '../stores/store';
+import { useAuthStore } from '../stores/store'
 export default {
   props: {
     child: Object
@@ -96,14 +101,12 @@ export default {
       children: []
     }
   },
-  methods: {
-
-  },
+  methods: {},
   computed: {},
   created() {
     this.children.push(this.child)
     this.role = this.store.role
-  },
+  }
 }
 </script>
 
