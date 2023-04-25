@@ -94,7 +94,7 @@ export default {
     }
   },
   async beforeCreate() {
-    const response = await children.getChild(this.id)
+    const response = await children.getChild(this.id)   
     this.child = response
     this.tutors = this.child.tutors
   }
