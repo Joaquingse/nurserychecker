@@ -49,12 +49,12 @@ export default {
     Tutors
   },
   props: {
-    child: Object
+    id: String
   },
   data() {
     return {
       store: useAuthStore(),
-      //child: {},
+      child: {},
       tutors: [],
       tutorInfo: false,
       info: {}
@@ -94,8 +94,8 @@ export default {
     }
   },
   async beforeMount() {
-    //const response = await children.getChild(this.id)   
-    //this.child = response
+    const response = await children.getChild(this.id)   
+    this.child = response
     this.tutors = this.child.tutors
   }
 }
