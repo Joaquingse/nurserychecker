@@ -93,8 +93,9 @@ export default {
       this.child.tutors = response.tutors
     }
   },
+
   async beforeMount() {
-    const response = await children.getChild(this.$route.params.id)   
+    const response = await children.getChild(this.$route.params.id) 
     this.child = response
     this.tutors = this.child.tutors
   }
