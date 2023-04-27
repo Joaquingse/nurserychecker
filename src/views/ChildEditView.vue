@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       store: useAuthStore(),
-      child: {},
+      child: JSON.parse(this.$route.params.kid),
       tutors: [],
       tutorInfo: false,
       info: {}
@@ -93,10 +93,7 @@ export default {
       this.child.tutors = response.tutors
     }
   },
-
-  async beforeMount() {
-    const response = await children.getChild(this.$route.params.id) 
-    this.child = response
+  created() {
     this.tutors = this.child.tutors
   }
 }

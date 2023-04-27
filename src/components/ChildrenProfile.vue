@@ -71,7 +71,7 @@
             class="text"
             append-icon="mdi-square-edit-outline"
             size="small"
-            :to="{ name: 'editchild', params: { id: child._id.toLocaleString() } }"
+            @click.prevent="editChild"
             v-if="role !== 'worker'"
             >editar</v-btn
           >
@@ -101,7 +101,11 @@ export default {
       children: []
     }
   },
-  methods: {},
+  methods: {
+    editChild(){
+      this.$router.push({ name: 'editchild', params: { kid: JSON.stringify(this.child) } })
+      }
+  },
   computed: {},
   created() {
     this.children.push(this.child)

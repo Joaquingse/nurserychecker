@@ -61,10 +61,10 @@ const router = createRouter({
       component: AddChildView
     },
     {
-      path: '/editchild/:id',
+      path: '/editchild/:kid',
       name: 'editchild',
       component: ChildEditView,
-      props: true
+      props: true,
     },
     {
       path: '/nurseries',
