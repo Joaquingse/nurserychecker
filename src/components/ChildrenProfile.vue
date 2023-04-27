@@ -104,7 +104,7 @@ export default {
   methods: {
     editChild(){
       this.$router.push({ name: 'editchild', params: { kid: JSON.stringify(this.child) } })
-    }
+      }
   },
   computed: {},
   created() {
