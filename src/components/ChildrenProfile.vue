@@ -90,6 +90,9 @@
 
 <script>
 import { useAuthStore } from '../stores/store'
+import * as CryptoJS from 'crypto-js';
+
+
 export default {
   props: {
     child: Object
@@ -102,9 +105,16 @@ export default {
     }
   },
   methods: {
-    editChild(){
-      this.$router.push({ name: 'editchild', params: { kid: JSON.stringify(this.child) } })
-      }
+    editChild() {
+      //encriptamos los datos que enviamos como query
+      const data = 'dataChild1#'
+      const info =  CryptoJS.AES.encrypt(JSON.stringify(this.child), data).toString()
+      this.$router.push({
+        name: 'editchild',
+        params: { id: this.child._id },
+        query: { kid: info }
+      })
+    }
   },
   computed: {},
   created() {

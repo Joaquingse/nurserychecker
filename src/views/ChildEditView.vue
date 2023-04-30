@@ -42,6 +42,7 @@ import Tutors from '../components/Tutors.vue'
 import children from '../services/children'
 import tutors from '../services/tutors'
 import { useAuthStore } from '../stores/store'
+import * as CryptoJS from 'crypto-js';
 
 export default {
   components: {
@@ -49,12 +50,15 @@ export default {
     Tutors
   },
   props: {
-    id: String
+    kid: {
+      type: String,
+      required: true,
+    }
   },
   data() {
     return {
       store: useAuthStore(),
-      child: JSON.parse(this.$route.params.kid),
+      child: {},
       tutors: [],
       tutorInfo: false,
       info: {}
@@ -94,6 +98,10 @@ export default {
     }
   },
   created() {
+    //desencriptamos los datos que reibimos como query
+    const data = 'dataChild1#'
+    const bytes = CryptoJS.AES.decrypt(this.kid, data)
+    this.child = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
     this.tutors = this.child.tutors
   }
 }
