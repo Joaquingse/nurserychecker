@@ -122,7 +122,7 @@
             <v-spacer></v-spacer>
             <!-- Este boton solo guarda los cambios en la info del child -->
             <v-btn
-              @click.prevent="updateTutor(tutor._id)"
+              @click.prevent="updateTutor(tutor._id, tutor)"
               prepend-icon="mdi-content-save-outline"
               class="text"
               v-if="role !== 'worker'"
@@ -203,15 +203,9 @@ export default {
       return resTutor
     },
 
-    async updateTutor(id) {
-      this.tutors.filter((tutor) => {
-        if (tutor._id === id) {
-          this.info = tutor
-        } else {
-          alert('Persona no encontrada')
-        }
-      })
-      const response = await tutors.updateTutor(id, this.info)
+    async updateTutor(id,tutor) {
+      const response = await tutors.updateTutor(id, tutor)
+      this.tutorInf()
       return response
     },
     // Funcion para buscar el dni dentro de la DB
