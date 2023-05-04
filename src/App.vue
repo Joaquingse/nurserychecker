@@ -38,9 +38,21 @@
     </v-main>
     <v-main v-else>
       <v-container>
-        <NavBar />
-        <RouterView />
-        <Footer />
+        <v-row>
+          <v-col>
+            <NavBar />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <RouterView />
+          </v-col>
+        </v-row>
+        <v-row class="mt-14">
+          <v-col>
+            <Footer />
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
   </v-app>
