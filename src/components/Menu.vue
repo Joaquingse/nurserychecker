@@ -1,13 +1,13 @@
 <template>
   <v-row>
     <v-col cols="12" sm="8" class="mt-2 mx-auto">
-      <v-btn size="x-large" class="button" :to="{ name: 'children' }"> Lista de niños </v-btn>
+      <v-btn size="x-large" class="button" :to="{ name: 'children' }"> Lista de alumn@s </v-btn>
 
       <v-btn size="x-large" class="button" :to="{ name: 'inout' }"> Llegada/Recogida </v-btn>
 
       <v-btn size="x-large" class="button" :to="{ name: 'events' }"> Eventos (D/S/M) </v-btn>
 
-      <v-btn size="x-large" class="button" :to="{ name: 'workers' }"> Usuarios </v-btn>
+      <v-btn size="x-large" class="button" :to="{ name: 'workers' }"> Usuari@s </v-btn>
 
       <v-btn size="x-large" class="button" :to="{ name: 'nurseries' }"> Guradería/s </v-btn>
     </v-col>
