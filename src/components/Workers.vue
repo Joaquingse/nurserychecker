@@ -12,10 +12,11 @@
     <v-card-actions>
       <v-spacer />
       <v-btn
-        class="text"
+        class="text2"
         v-if="role === 'admin'"
         prepend-icon="mdi-trash-can-outline"
         size="small"
+        variant="outlined"
       >
         Eliminar
         <v-dialog v-model="dialog" activator="parent" width="auto">
@@ -144,6 +145,16 @@ export default {
 
 .text:hover {
   color: #ffffff;
+}
+
+.text2 {
+  color:  #ef476f;
+  background-color: #073b4c;
+  margin-left: 5px;
+}
+.text2:hover {
+  color: #073b4c;
+  background-color:  #ef476f;
 }
 .info {
   color: #ffffff;
