@@ -14,8 +14,8 @@
         Atrás
       </v-btn>
     </v-row>
-    <v-row justify="center">
-      <v-col cols="12" sm="8" md="6" v-for="(user, idx) in users" :key="idx">
+    <v-row justify="start">
+      <v-col cols="12" sm="6" md="4" v-for="(user, idx) in users" :key="idx">
         <Workers :user="user" @remove_user="deleteUser" @edit_user="updateInfo" />
       </v-col>
     </v-row>

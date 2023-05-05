@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col>
-      <v-card>
+      <v-card flat>
         <v-list class="info">
           <v-list-group>
             <template v-slot:activator="{ props }">
@@ -76,9 +76,10 @@
             >editar</v-btn
           >
           <v-btn
-            class="text"
+            class="text2"
             append-icon="mdi-trash-can-outline"
             size="small"
+            variant="outlined"
             v-if="role === 'admin' || role === 'owner'"
             >eliminar</v-btn
           >
@@ -134,6 +135,16 @@ export default {
 .text:hover {
   color: #073b4c;
   background-color: #06d6a0;
+}
+
+.text2 {
+  color:  #ef476f;
+  background-color: #073b4c;
+  margin-left: 5px;
+}
+.text2:hover {
+  color: #073b4c;
+  background-color:  #ef476f;
 }
 
 .info {
