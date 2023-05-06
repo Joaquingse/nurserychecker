@@ -113,7 +113,7 @@
  -->
     <!-- resultados -->
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="10" md="8" class="mx-auto">
         <dropsInfo :drops="drops" v-if="dropsResult" />
         <picksInfo :picks="picks" :noData="noData" v-if="picksResult" />
 
