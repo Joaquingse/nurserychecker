@@ -1,18 +1,18 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto box">
+      <v-col cols="12" sm="8" class="mx-auto box">
         <h2 style="color: white">Centro:</h2>
         <!-- future implementation -->
         <v-spacer></v-spacer>
-        <v-btn @click.prevent="edit = true" class="text" size="small" v-if="!edit">Editar</v-btn>
+        <v-btn @click.prevent="edit = true" class="text" size="small" v-if="!edit && store.role !== 'worker'">Editar</v-btn>
         <v-btn @click.prevent="goBack" class="text" prepend-icon="mdi-chevron-left" size="small">
           Atrás
         </v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="10" class="mx-auto">
+      <v-col cols="12" sm="8" class="mx-auto">
         <v-card class="info" v-if="!edit">
           <v-card-title>
             {{ nursery.name }}
@@ -90,6 +90,7 @@ import nurseries from '../services/nursery.js'
 export default {
   data() {
     return {
+      store: useAuthStore(),
       nursery: {},
       edit: false
     }
@@ -117,14 +118,13 @@ export default {
 
 <style scoped>
 .text {
-  color: #073b4c;
-  background-color: #06d6a0;
+  color: #06d6a0;
+  background-color: #073b4c;
   margin-left: 15px;
 }
-
 .text:hover {
   color: #ffffff;
-  border: 2px solid white;
+  background-color: #06d6a0;
 }
 .box {
   display: flex;

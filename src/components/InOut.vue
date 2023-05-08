@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="10" md="8" class="mx-auto box">
         <h2 style="color: white">Elige una opción:</h2>
-        <v-btn @click.prevent="goBack" class="text"  prepend-icon="mdi-chevron-left" size="small"> Atrás </v-btn>
+        <v-btn @click.prevent="goBack" class="text3"  prepend-icon="mdi-chevron-left" size="small"> Atrás </v-btn>
       </v-col>
     </v-row>
     <!-- Seleccion consultas, llegada o salida -->
@@ -373,6 +373,15 @@ export default {
 .text2:hover {
   color: #ffffff;
   border: 2px solid white;
+}
+.text3 {
+  color: #06d6a0;
+  background-color: #073b4c;
+  margin-left: 15px;
+}
+.text3:hover {
+  color: #ffffff;
+  background-color: #06d6a0;
 }
 .box {
   display: flex;
