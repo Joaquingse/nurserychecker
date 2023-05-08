@@ -3,7 +3,7 @@
     <v-row class="mt-2">
       <v-col cols="12" sm="10" md="8" class="mx-auto">
         <v-row class="pr-3 ml-1" justify="end">
-          <h2 class="info">Listado de alumnos</h2>
+          <h2 class="info">Alumn@s</h2>
           <v-spacer></v-spacer>
           <v-btn
             :to="{ name: 'addchild' }"
