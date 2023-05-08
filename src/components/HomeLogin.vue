@@ -6,9 +6,21 @@
           src="https://res.cloudinary.com/burgerproject/image/upload/v1678192287/My%20images/logo_wh8syi.png"
           alt="logo"
         ></v-img>
+        <v-card color="rgba(0,0,0,0)" flat>
+          <v-card-text>
+            Aplicación desarrollada gracias al proyecto iniciado por
+            <strong
+              ><a href="https://www.fulp.es/" target="_blank" class="fulp"
+                >La Fundación Universitadia de Las Palmas</a
+              ></strong>, la cual nos puso en manos de <strong
+              ><a href="https://reboot.academy/" target="_blank" class="reboot"
+                >Reboot Academy</a
+              ></strong>.
+        </v-card-text>
+        </v-card>
       </v-col>
-      <v-col cols="12" sm="8" md="4" class="mx-auto">
-        <v-card color="rgba(0,0,0,0)" flat >
+      <v-col cols="12" sm="8" md="5" class="mx-auto">
+        <v-card color="rgba(0,0,0,0)" flat>
           <v-card-title id="text">Login</v-card-title>
           <v-card-text>
             <v-text-field
@@ -30,9 +42,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn @click.prevent="loginUser"  class="button">
-              aceptar
-            </v-btn>
+            <v-btn @click.prevent="loginUser" class="button" size="small"> aceptar </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -81,9 +91,21 @@ export default {
 </script>
 
 <style scoped>
+.fulp {
+  color: orange;
+  font-family: 'CircularStd', sans-serif;
+  text-decoration: none;
+}
+
+.reboot {
+  font-family: Darker Grotesque,sans-serif;
+  text-decoration: none;
+  color: rgb(60, 234, 234);
+}
 .button {
   color: #06d6a0;
   background-color: #073b4c;
+  bottom: 15px;
 }
 
 .button:hover {
@@ -96,11 +118,15 @@ export default {
   font-weight: 600;
 }
 .roww {
+
   height: 75vh;
 }
-@media (min-width: 720px) {
 
-/*   #row {
+@media (min-width: 720px) {
+  .roww {
+  height: 75vh;
+}
+  /*   #row {
     display: grid;
     grid-template-areas: 'a b';
   }
