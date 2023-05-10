@@ -111,6 +111,7 @@ export default {
 .button:hover {
   border: 2px solid #073b4c;
   background-color: #118ab2;
+  color: #073b4c;
 }
 
 #text {
@@ -118,28 +119,8 @@ export default {
   font-weight: 600;
 }
 .roww {
-
   height: 75vh;
 }
 
-@media (min-width: 720px) {
-  .roww {
-  height: 75vh;
-}
-  /*   #row {
-    display: grid;
-    grid-template-areas: 'a b';
-  }
 
-  #a {
-    grid-area: a;
-    width: 30vw;
-    align-self: center;
-  }
-  #b {
-    grid-area: b;
-    width: 30vw;
-    padding-top: 50px;
-  } */
-}
 </style>
