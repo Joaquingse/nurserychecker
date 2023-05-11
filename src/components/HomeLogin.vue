@@ -19,7 +19,7 @@
         </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="8" md="5" class="mx-auto">
+      <v-col cols="12" sm="8" md="5" lg="4" class="mx-auto">
         <v-card color="rgba(0,0,0,0)" flat>
           <v-card-title id="text">Login</v-card-title>
           <v-card-text>
