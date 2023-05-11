@@ -11,7 +11,6 @@ import AddNewUserView from '../views/AddNewUserView.vue'
 import AddChildView from '../views/AddChildView.vue'
 import ChildEditView from '../views/ChildEditView.vue'
 import SearchInOutView from '../views/SearchInOutView.vue'
-import PageNotFoundView from '../views/PageNotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,10 +76,6 @@ const router = createRouter({
       name: 'search',
       component: SearchInOutView
     },
-    { 
-      path: '/:pathMatch(.*)*', 
-      name: 'NotFound', 
-      component: PageNotFoundView },
     {
       path: '/about',
       name: 'about',
